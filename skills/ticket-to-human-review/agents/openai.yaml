@@ -1,0 +1,4 @@
+interface:
+  display_name: "Ticket To Human Review"
+  short_description: "Human signoff for implementation contracts"
+  default_prompt: "Use $ticket-to-human-review to review and sign off an implementation contract before development/testing starts."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Implementation Contract Conveyor"
+  short_description: "Compile approved design clusters into full-SDLC implementation contracts"
+  default_prompt: "Use $implementation-contract-conveyor to convert approved Design Contracts and implementation-readiness rows into one full-SDLC child contract under the active Implementation Contract parent before human contract signoff."

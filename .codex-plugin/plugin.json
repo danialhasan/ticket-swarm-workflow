@@ -1,0 +1,41 @@
+{
+  "name": "ticket-swarm-workflow",
+  "version": "0.1.0",
+  "description": "Repo-local workflow plugin for design contracts, implementation-contract signoff, iterative development/testing composition, execution days, and feature-decision hygiene.",
+  "author": {
+    "name": "TrySquad"
+  },
+  "license": "UNLICENSED",
+  "keywords": [
+    "workflow",
+    "tickets",
+    "verification",
+    "swarm"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Ticket Swarm Workflow",
+    "shortDescription": "Compile and run implementation-contract workflows",
+    "longDescription": "Repo-local workflow plugin for moving Squad work from design contracts into signed-off implementation contracts, then into iterative multi-agent development/testing composition with review loops, layered verification, receipts, and separate human-triggered release handoff.",
+    "developerName": "TrySquad",
+    "category": "Productivity",
+    "capabilities": [
+      "Interactive",
+      "Write"
+    ],
+    "defaultPrompt": [
+      "Use $design-contract-conveyor for live route/state design review before compiling implementation contracts; implementation contracts only begin after the relevant Design Contract route cluster is approved.",
+      "Use $implementation-contract-conveyor to turn approved Design Contract clusters and implementation-readiness rows into one full-SDLC child contract under the active Implementation Contract parent.",
+      "Use $ticket-to-human-review to human-review and sign off an implementation contract before development/testing starts.",
+      "After contract signoff, run development/testing by directly composing $multi-agent-workflow, $layered-verification, worktree orchestration, review loops, and receipt-producing verification skills.",
+      "Use $ticket-day-operator to turn a board target and today's calendar into an hourly close plan with deploy-truth and shifted-schedule rules.",
+      "Use $calendar-dag-scheduler plus $linear-day-allocator when today's free windows need to become real Calendar blocks and due-today child tickets in Linear.",
+      "Use $parallel-lane-orchestrator plus $review-batch-orchestrator when multiple dependency-ready tickets should execute in parallel and converge into one grouped review wave.",
+      "Use $sequential-ticket-review-queue when you need the lowest-level review loop: one ticket worktree at a time, human validate it, sign off, move Linear to Done, then advance to the next ticket.",
+      "Use $beta-release-assist only for separate post-development release handoff after the human enters release work.",
+      "Use $day-state-updater when a blocker clears or a lane slips and the rest of the day needs to be reflowed honestly.",
+      "Use $feature-decision-ledger to compile feature ideas from Slack, meetings, and Linear into one beta thesis, non-goal, parking-lot, and kill-list surface."
+    ],
+    "brandColor": "#1D4ED8"
+  }
+}

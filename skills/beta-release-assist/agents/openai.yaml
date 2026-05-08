@@ -1,0 +1,4 @@
+interface:
+  display_name: "Beta Release Assist"
+  short_description: "Prepare human-triggered beta releases"
+  default_prompt: "Use $beta-release-assist to verify deploy readiness, updater/feed health, and the human release handoff for a merged beta slice."

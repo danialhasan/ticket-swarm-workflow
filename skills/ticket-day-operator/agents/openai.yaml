@@ -1,0 +1,4 @@
+interface:
+  display_name: "Ticket Day Operator"
+  short_description: "Plan one execution day against the real calendar"
+  default_prompt: "Use $ticket-day-operator to turn a board target and today's calendar into an hourly close plan with shifted schedule math and deploy-truth checks."

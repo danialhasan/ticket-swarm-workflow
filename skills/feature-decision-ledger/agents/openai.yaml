@@ -1,0 +1,4 @@
+interface:
+  display_name: "Feature Decision Ledger"
+  short_description: "Compile feature memory into one beta decision surface"
+  default_prompt: "Use $feature-decision-ledger to compile feature ideas from Slack, meetings, and Linear into one beta thesis, non-goal, parking-lot, kill-list, and undecided-gap ledger."

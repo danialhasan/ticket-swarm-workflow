@@ -1,0 +1,4 @@
+interface:
+  display_name: "Ticket Human Review Runtime"
+  short_description: "Prepare ticket-level human QA runtime"
+  default_prompt: "Use $ticket-human-review-runtime to choose the right review worktree, launch the correct dev surface, and produce a concrete human QA checklist."

@@ -1,0 +1,5 @@
+interface:
+  display_name: "Worktree Lane Orchestrator"
+  short_description: "Allocate ticket worktrees for parallel lanes"
+  default_prompt: "Use $worktree-lane-orchestrator to allocate integration and lane worktrees before parallel execution starts."
+

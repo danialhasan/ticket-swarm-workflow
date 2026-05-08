@@ -1,0 +1,5 @@
+interface:
+  display_name: "Worktree Lane Reconcile"
+  short_description: "Collapse lane worktrees onto one surviving integration branch"
+  default_prompt: "Use $worktree-lane-reconcile to reconcile parallel lane worktrees and record cleanup posture before human verification."
+
