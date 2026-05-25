@@ -18,9 +18,9 @@ Use one consistent worktree layout for parallel ticket execution.
 
 Examples:
 
-- `ticket/SQD-884/integration`
-- `ticket/SQD-884/implementation`
-- `ticket/SQD-884/review-runtime`
+- `ticket/PROJ-123/integration`
+- `ticket/PROJ-123/implementation`
+- `ticket/PROJ-123/review-runtime`
 
 ## Ownership rules
 
@@ -40,11 +40,11 @@ Record these in the worktree matrix when relevant:
 - output directories
 - shared temp paths
 - env overrides
-- Electron MCP verifier slot ownership
+- `ui_automation_driver` verifier slot ownership
 
 If collisions cannot be isolated cleanly, serialize that lane instead of forcing fake parallelism.
 
-Electron MCP verification is one serialized resource across active ticket worktrees:
+`ui_automation_driver` verification is one serialized resource across active ticket worktrees:
 
 - only one verifier lane holds the Electron slot at a time
 - other tickets may continue non-Electron work in parallel

@@ -46,7 +46,7 @@ implementation-ready until it maps to one primary canon seam.
 - a Design Contract cluster is approved and needs an implementation child
 - an implementation-readiness row needs to become a child implementation
   contract under the active Implementation Contract parent
-- Danial asks which approved surfaces can start implementation
+- The configured product reviewer asks which approved surfaces can start implementation
 - a broad wave plan needs to be split into one runnable implementation seam
 - an implementation contract is almost ready for human signoff, but still lacks
   a proof matrix, review plan, governance posture, or source-of-truth contract
@@ -66,7 +66,7 @@ Do not use this skill when:
 
 ## Required Inputs
 
-- live Linear readback for the design issue, the active readiness/prep bridge,
+- live `issue_tracker` readback for the design issue, the active readiness/prep bridge,
   and the active Implementation Contract parent
 - approved Design Contract references and approval notes
 - browser receipts, screenshots, annotations, or review evidence
@@ -84,8 +84,9 @@ Do not use this skill when:
   elicitation, mission setup, orchestration, generative UI, governance, or
   model/eval behavior instead of an already-approved narrow design cluster
 
-Use `/Users/danialhasan/dev/squad/docs/operations/sessions/2026-05-03/implementation-contract-template-v2.md`
-as the repo-local template unless a newer template is explicitly accepted.
+Use the host workspace's accepted implementation-contract template, such as
+`<WORKSPACE_RECEIPT_ROOT>/implementation-contract-template.md`, unless a newer
+template is explicitly accepted.
 
 ## Related Skills
 
@@ -96,7 +97,7 @@ Load these only when the current implementation-contract pass needs them:
 - `$design-contract-conveyor` only as the source of approved design truth; do
    not reopen design while compiling the contract unless approval is missing.
 - `$multi-agent-workflow` for bounded discovery lanes when canon, code,
-   Linear, or review evidence need independent confirmation.
+   `issue_tracker`, or review evidence need independent confirmation.
 - `../references/high-fidelity-requirements-map.md` when the contract is being
    generated from requirements engineering or elicitation rather than a
    previously accepted design cluster.
@@ -112,11 +113,11 @@ Load these only when the current implementation-contract pass needs them:
 
 ## Phase 1: Live Topology And Approval Gate
 
-Before drafting the contract, read live Linear.
+Before drafting the contract, read live `issue_tracker`.
 
 Confirm:
 
-- active Implementation Contract parent, resolved from live Linear instead of
+- active Implementation Contract parent, resolved from live `issue_tracker` instead of
   hard-coded from a prior project instance
 - active readiness/prep bridge, when one exists
 - source Design Contract issue is approved
@@ -125,7 +126,7 @@ Confirm:
 - route cluster is not parked, duplicate, canceled, cut, or folded elsewhere
 
 Stop with `Blocked` if approval is missing or the row is not implementation
-ready. Do not create a Linear child from stale local notes alone.
+ready. Do not create an `issue_tracker` child from stale local notes alone.
 
 Classify each candidate before child creation:
 
@@ -135,8 +136,8 @@ Classify each candidate before child creation:
   multiple independently runnable seams.
 - `CANON_PROPOSAL_REQUIRED`: implementation would harden a new product noun or
   ownership boundary that canon has not accepted.
-- `DELIVERY_BLOCKED`: development may continue, but beta exposure cannot be
-  promised because Section `21` delivery truth is not ready.
+- `DELIVERY_BLOCKED`: development may continue, but release exposure cannot be
+  promised because the configured `<release_policy_ref>` is not ready.
 - `PARKED`: not part of the active implementation wave.
 
 ## Phase 2: Implementation Identity
@@ -145,7 +146,7 @@ Name the contract in both product and tracker language.
 
 Capture:
 
-- Linear parent and proposed child id/title
+- `issue_tracker` parent and proposed child id/title
 - source Design Contract issue ids
 - source readiness/prep row
 - target route, state, or product surface
@@ -288,18 +289,18 @@ Capture:
 - simplification review need
 - contract signoff path through `$ticket-to-human-review`
 - receipt paths to create
-- Linear checklist and comment updates
+- `issue_tracker` checklist and comment updates
 - machine verification receipt requirements
 - explicit deployment/release boundary
-- release eligibility gate through Section `21` when beta exposure is expected
+- release eligibility gate through `<release_policy_ref>` when exposure is expected
 
 `SIGNED_OFF` from `$ticket-to-human-review` means the implementation contract is
 approved for development/testing. It does not mean the work is implemented,
 verified, deployed, or released. Deployment/release is handled by a separate
 human-triggered workflow.
 
-If the implementation contract claims a signed-off slice can reach beta users,
-it must reference the Section `21` delivery rail and the deploy-readiness packet
+If the implementation contract claims a signed-off slice can reach users,
+it must reference `<release_policy_ref>` and the deploy-readiness packet
 required by `$beta-release-assist`. Do not let implementation contracts silently
 inherit release capability from the development workflow.
 
@@ -357,14 +358,14 @@ Return a compact packet with:
 
 - readiness verdict: `Ready for contract signoff`, `Needs cleanup`, or
   `Blocked`
-- proposed or updated Linear child
+- proposed or updated `issue_tracker` child
 - implementation contract body
 - SDLC composition map for development/testing
 - required receipts
 - first execution command or next workflow skill
 - explicit blocker reason for anything incomplete
 
-If Linear mutation is requested, create or update the implementation child only
+If `issue_tracker` mutation is requested, create or update the implementation child only
 after live readback and action-time user approval. If mutation is not approved,
 return the proposed ticket body and mark it ready for creation.
 
@@ -378,5 +379,5 @@ This skill is complete when:
 - contract signoff, iterative dev/testing composition, and proof receipts are
   named
 - deployment/release is explicitly out of scope
-- the next action is either Linear creation/update or `$ticket-to-human-review`
+- the next action is either `issue_tracker` creation/update or `$ticket-to-human-review`
   contract signoff

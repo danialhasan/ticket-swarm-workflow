@@ -260,6 +260,11 @@ The field-level version:
 
 ## Part Two: How [Squad](https://trysquad.ai) Applies This
 
+This section is a public worked example. If you are adapting the workflow to
+another product, replace Squad's nouns with your host product's work unit,
+proof surface, review model, and adapter terms from
+[`docs/taxonomy.md`](taxonomy.md).
+
 ### 1. [Squad](https://trysquad.ai) Is Built Around Missions You Can Trust
 
 [Squad](https://trysquad.ai) is organized around missions, not generic chat. That matters because a mission is the smallest unit of delegated work that can hold:
@@ -435,11 +440,11 @@ This addendum restates the memo in examples. The point is not to add a second th
 
 User request:
 
-> "Let users connect Slack from inside [Squad](https://trysquad.ai)."
+> "Let users connect a `team_chat` provider from inside [Squad](https://trysquad.ai)."
 
 Weak agent interpretation:
 
-> "Make sure the backend can generate a Slack auth link."
+> "Make sure the backend can generate a `team_chat` provider auth link."
 
 That may be useful, but it is only one requirement. The user-facing request actually contains several different claims:
 
@@ -448,7 +453,7 @@ That may be useful, but it is only one requirement. The user-facing request actu
 | Backend can create a managed auth link | backend/tool-call | API returns a valid provider auth URL for the right workspace/user context | backend receipt, API test, provider response | none; this only proves the backend claim |
 | User can start connection from the app | user journey | user clicks Connect in the visible app surface and gets the auth handoff | browser/app click-path proof | direct backend call, terminal command, copied URL |
 | App reflects connected state after auth | durable UI/state | returning to [Squad](https://trysquad.ai) refreshes readiness and shows connected state | app state readback, UI proof, persistence receipt | screenshot before refresh, stale local state |
-| Agent can use Slack after user grants access | tool permission/runtime | tool invocation succeeds under the connected user/workspace boundary | tool-call receipt with connection id/workspace | auth success alone |
+| Agent can use a `team_chat` provider after user grants access | tool permission/runtime | tool invocation succeeds under the connected user/workspace boundary | tool-call receipt with connection id/workspace | auth success alone |
 
 Requirements engineering prevents the agent from accepting the first row as proof of all four rows.
 
@@ -499,16 +504,16 @@ Feature-list decomposition:
 Business-event decomposition:
 
 ```text
-Event: user decides to connect Slack during work.
+Event: user decides to connect a `team_chat` provider during work.
 Required response: the app offers a visible Connect action in the current work context.
 Proof: click Connect from the app surface and receive auth handoff.
 
-Event: user returns after Slack auth.
+Event: user returns after `team_chat` provider auth.
 Required response: the app reconciles connection state and shows what changed.
 Proof: app readback shows connected state tied to the right workspace.
 
-Event: agent tries to use Slack in a mission.
-Required response: the app checks permission and either uses Slack or asks for approval/connection.
+Event: agent tries to use a `team_chat` provider in a mission.
+Required response: the app checks permission and either uses a `team_chat` provider or asks for approval/connection.
 Proof: tool receipt or approval-required receipt.
 ```
 
@@ -565,7 +570,7 @@ Agentic lesson:
 
 Functional requirement:
 
-> "The agent can post a Slack update."
+> "The agent can post a `team_chat` provider update."
 
 Trust requirements:
 
@@ -573,11 +578,11 @@ Trust requirements:
 | --- | --- | --- |
 | Consent | Posting externally affects other people. | approval/permission receipt |
 | Auditability | User may need to know what was sent and why. | message link, trace, source claim |
-| Privacy | Context may include information not meant for Slack. | redaction/policy check |
+| Privacy | Context may include information not meant for the `team_chat` provider. | redaction/policy check |
 | Recovery | Bad message may need correction. | edit/delete capability or fallback note |
 | Tone | The message represents the operator. | human-review packet if tone is judgment-heavy |
 
-The Slack post can technically succeed and still be unacceptable if these trust requirements fail.
+The `team_chat` provider post can technically succeed and still be unacceptable if these trust requirements fail.
 
 Agentic lesson:
 
@@ -623,13 +628,13 @@ Better workflow:
 
 ```text
 Candidate requirement from agent:
-Users can connect Slack from Settings.
+Users can connect a `team_chat` provider from Settings.
 
 Source check:
 User correction says real users use the in-app connector flow.
 
 Revised admitted requirement:
-Users can start and complete Slack connection through the in-app connector flow, with Settings as a secondary management surface.
+Users can start and complete `team_chat` provider connection through the in-app connector flow, with Settings as a secondary management surface.
 
 Decision owner:
 Product owner owns the user-facing path.
@@ -650,14 +655,14 @@ Old ready-for-dev packet:
 
 ```text
 Ticket: Fix connector flow.
-Acceptance: Slack connects.
+Acceptance: `team_chat` provider connects.
 ```
 
 Ready-for-delegation packet:
 
 ```text
 Objective:
-Users can connect Slack from the app path they naturally use.
+Users can connect a `team_chat` provider from the app path they naturally use.
 
 Scope:
 Composer connector action, Settings connector action, auth handoff, readiness refresh.
@@ -669,14 +674,14 @@ Source authority:
 Product correction, visible app flow, connector provider contract, Settings readiness code.
 
 Business event:
-User tries to use Slack capability during a mission and is not connected.
+User tries to use a `team_chat` provider capability during a mission and is not connected.
 
 Assumptions to falsify:
 Settings readiness command can represent managed auth state.
 Composer path can reuse Settings setup command.
 
 Fit criteria:
-Click Connect from app surface, complete auth, return, see connected state, run Slack tool.
+Click Connect from app surface, complete auth, return, see connected state, run a `team_chat` provider tool.
 
 Proof:
 App journey proof, backend receipt, tool receipt.
@@ -695,25 +700,25 @@ Agentic lesson:
 
 Bad closeout:
 
-> "Implemented Slack connector support. Tests pass."
+> "Implemented `team_chat` provider connector support. Tests pass."
 
 Better closeout:
 
 ```text
 Claim:
-Users can connect Slack from the in-app connector flow.
+Users can connect a `team_chat` provider from the in-app connector flow.
 
 Requirement:
-REQ-SLACK-IN-APP-CONNECTOR-FLOW.
+REQ-TEAM-CHAT-IN-APP-CONNECTOR-FLOW.
 
 Source:
 Product correction and visible connector menu.
 
 Fit criterion:
-User starts from app, completes auth, returns, sees connected state, and can use Slack.
+User starts from app, completes auth, returns, sees connected state, and can use a `team_chat` provider.
 
 Evidence:
-App path receipt, backend connection receipt, Slack tool invocation receipt.
+App path receipt, backend connection receipt, `team_chat` provider tool invocation receipt.
 
 Caveat:
 Workspace picker edge case still needs human review.

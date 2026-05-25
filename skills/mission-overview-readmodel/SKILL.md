@@ -37,8 +37,8 @@ authority it has without reading the whole agent transcript.
 ## Required Inputs
 
 - Mission ref.
-- `mission.get_operating_context` readback.
-- `mission_current_state`, proof/readiness, review surface, and runtime-proof
+- `<mission_operating_context_tool>` readback.
+- `<current_state_projection>`, proof/readiness, review surface, and runtime-proof
   query refs where applicable.
 - Governance policy/grant readback.
 - Transcript/session refs for read-only display only.
@@ -61,7 +61,7 @@ sections just because the data is available.
 
 ## Truth Rules
 
-- The overview reads from `mission.get_operating_context` and related named
+- The overview reads from `<mission_operating_context_tool>` and related named
   projections.
 - The transcript is context, not control. Users do not send messages to the
   mission agent from this surface.
@@ -93,7 +93,7 @@ Return or render:
 
 Do not claim mission state when:
 
-- `mission.get_operating_context` is missing, stale, or not for the requested
+- `<mission_operating_context_tool>` is missing, stale, or not for the requested
   mission;
 - active run, grant, task, proof, or review state is inferred from transcript;
 - blockers and waits cannot be distinguished;

@@ -15,8 +15,8 @@
   "skills": "./skills/",
   "interface": {
     "displayName": "Ticket Swarm Workflow",
-    "shortDescription": "Route Squad work from requirements truth to contracts, execution, review, and release",
-    "longDescription": "Repo-local workflow plugin for moving Squad work from requirements/product-truth discovery into design contracts, signed-off implementation contracts, execution orchestration, review reconciliation, layered verification, receipts, and separate human-triggered release handoff.",
+    "shortDescription": "Route Squad-style product work from requirements truth to contracts, execution, review, and release",
+    "longDescription": "Repo-local workflow plugin for moving Squad-style product work from requirements/product-truth discovery into design contracts, signed-off implementation contracts, execution orchestration, review reconciliation, layered verification, receipts, and separate human-triggered release handoff.",
     "developerName": "TrySquad",
     "category": "Productivity",
     "capabilities": [
@@ -30,7 +30,7 @@
       "Keep every pass outcome-first: user-visible outcome, current truth, forbidden claims, required evidence, selected workflow, receipt path, next action.",
       "Run requirements/product-truth work before contracts or execution whenever the problem, actor, scenario, fit criterion, proof surface, or decision owner is unclear.",
       "Use $goal-loop-operator for broad /goal-style product outcomes that must loop until green, blocked, or explicitly deferred.",
-      "Use $annotation-reconciliation-guard when Danial's live annotations must become hard reconciliation rows before readiness can be claimed.",
+      "Use $annotation-reconciliation-guard when live product annotations or reviewer notes must become hard reconciliation rows before readiness can be claimed.",
       "Use $ui-abstraction-guard when repeated UI abstraction failures should become proactive rules, scans, contracts, or checks instead of more manual annotation.",
       "Use $squad-harness-engineering when Squad agent behavior, prompt/tool manifests, eval traces, trajectories, datasets, or applied-AI harness failures need source-backed cases, scorers or judges, baseline comparison, and regression receipts.",
       "Use contract, lane, review, calendar, day, and release skills only when their routing condition is met; do not invoke them as ceremony."

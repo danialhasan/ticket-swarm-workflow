@@ -52,7 +52,7 @@ context is a controlled input surface rather than prompt stuffing, see
 - User outcome or problem statement.
 - Workspace, repo, and current mission/session refs when available.
 - Allowed sources: codebase, docs, memory, transcripts, connectors, browser
-  receipts, Linear, Slack, Drive, Gmail, Calendar, or other connected systems.
+  receipts, `issue_tracker`, `team_chat`, Drive, Gmail, Calendar, or other connected systems.
 - Governance posture for source access and connector use.
 - Existing context graph path or statement that no graph exists.
 - Required receipt target.
@@ -69,7 +69,7 @@ Use only the minimum composition needed:
 - `ask_user_question` only for missing decisions, not for machine-verifiable
   source reads.
 
-If connector data is needed, use the governed Squad connector or Composio rail.
+If connector data is needed, use the governed Squad connector or the configured connector adapter rail.
 Do not copy external-tool results into mission truth until a later canonical
 command admits the derived claim.
 
@@ -167,7 +167,7 @@ Stop before mission definition when:
 
 Receipt must include:
 
-- `Linear issue` when available.
+- `issue_tracker` issue when available.
 - `Internal ticket id` when available.
 - Context graph path and hash.
 - Sources read and sources skipped.

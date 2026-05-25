@@ -75,7 +75,7 @@ Normal path:
    - assumptions and falsification checks.
 5. Use `mission.define` when the definition is ready to become canonical.
 6. Verify accepted readback with `mission.status` or
-   `mission.get_operating_context`.
+   `<mission_operating_context_tool>`.
 7. Ensure task decomposition is admitted into canonical task state, or mark the
    task DAG as `HOLD` before approval.
 8. Use `mission.select_route_control` from allowed readback refs.
@@ -98,7 +98,7 @@ subagents do not automatically share the same tool exposure.
 
 Each forecasted capability must name:
 
-- tool id, such as `mission.get_operating_context`, `repo.search`, or
+- tool id, such as `<mission_operating_context_tool>`, `repo.search`, or
   `external.execute`;
 - target ref when the tool is connector-scoped;
 - effect: `read`, `write`, `execute`, or `approve`;

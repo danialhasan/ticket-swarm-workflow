@@ -1,6 +1,6 @@
 ---
 name: calendar-dag-scheduler
-description: Use when today's real Google Calendar needs to become a concrete ticket execution calendar backed by the Linear dependency graph.
+description: Use when today's real calendar availability needs to become a concrete ticket execution calendar backed by the issue-tracker dependency graph.
 ---
 
 # Calendar DAG Scheduler
@@ -13,15 +13,15 @@ Use this skill when the question is:
 - how do we place grouped review and patch blocks into the day
 
 This skill is the calendar-writing planner.
-It does not itself decide ticket state transitions in Linear.
+It does not itself decide ticket state transitions in the configured `issue_tracker`.
 It hands those tickets to `linear-day-allocator`.
 
 ## Inputs to gather first
 
 - local date and timezone
-- today's Google Calendar events
+- today's `calendar_provider` events
 - today's free windows
-- candidate child issues from the active Linear project
+- candidate child issues from the active `issue_tracker` project
 - parent/child relationship data
 - dependency graph or blocker graph
 - current issue state counts
@@ -30,11 +30,13 @@ It hands those tickets to `linear-day-allocator`.
 
 Start by reading:
 
-- `/Users/danialhasan/dev/squad/plugins/ticket-swarm-workflow/skills/ticket-day-operator/SKILL.md`
-- `/Users/danialhasan/dev/squad/plugins/ticket-swarm-workflow/skills/parallel-lane-orchestrator/SKILL.md`
-- `/Users/danialhasan/dev/squad/plugins/ticket-swarm-workflow/skills/review-batch-orchestrator/SKILL.md`
+- `../ticket-day-operator/SKILL.md`
+- `../parallel-lane-orchestrator/SKILL.md`
+- `../review-batch-orchestrator/SKILL.md`
 
-Use Google Calendar and Linear through Composio.
+Use the configured `calendar_provider` and `issue_tracker` adapters. Examples include Google
+Calendar or Outlook Calendar for `calendar_provider`, and Linear, Jira, GitHub Issues, or
+Shortcut for `issue_tracker`.
 
 ## Goal
 

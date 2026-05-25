@@ -1,23 +1,23 @@
 ---
 name: linear-day-allocator
-description: Use when a daily execution plan needs to become real Linear ownership, due-date, and state-allocation truth for dependency-ready child issues.
+description: Use when a daily execution plan needs to become real issue-tracker ownership, due-date, and state-allocation truth for dependency-ready child issues.
 ---
 
-# Linear Day Allocator
+# Issue Tracker Day Allocator
 
 Use this skill when the question is:
 
 - which tickets are officially in scope for today
 - which child issues should be due today
 - who should own each selected ticket
-- how do we reflect today's calendar-backed plan into Linear
+- how do we reflect today's calendar-backed plan into the configured `issue_tracker`
 
-This skill applies the day plan to Linear.
+This skill applies the day plan to the configured `issue_tracker`.
 It should usually run after `calendar-dag-scheduler`.
 
 ## Inputs to gather first
 
-- active Linear project
+- active `issue_tracker` project
 - today's selected ticket list
 - parent/child relationship data
 - dependency graph
@@ -28,14 +28,15 @@ It should usually run after `calendar-dag-scheduler`.
 
 Start by reading:
 
-- `/Users/danialhasan/dev/squad/plugins/ticket-swarm-workflow/skills/calendar-dag-scheduler/SKILL.md`
-- `/Users/danialhasan/dev/squad/plugins/ticket-swarm-workflow/skills/ticket-day-operator/SKILL.md`
+- `../calendar-dag-scheduler/SKILL.md`
+- `../ticket-day-operator/SKILL.md`
 
-Use Linear through Composio.
+Use the configured `issue_tracker` adapter. Examples include Linear, Jira, GitHub Issues, and
+Shortcut.
 
 ## Goal
 
-Turn a schedule-backed close plan into honest Linear truth:
+Turn a schedule-backed close plan into honest `issue_tracker` truth:
 
 - selected child tickets are due today
 - parent issues remain excluded

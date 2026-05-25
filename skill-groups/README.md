@@ -24,5 +24,5 @@ Requirements discovery and product-truth skills must run before contract,
 execution, or release skills whenever the problem, actor, scenario, proof
 surface, or decision owner is unclear.
 
-If the router is unavailable in the active runtime cache, manually apply this
-taxonomy and record the cache/source drift in the closeout.
+If the router skill is unavailable in the active agent runtime, manually apply
+this taxonomy and record the install or skill-discovery issue in the closeout.

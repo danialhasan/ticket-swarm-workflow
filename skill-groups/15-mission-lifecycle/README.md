@@ -1,8 +1,8 @@
 # 15 Mission Lifecycle
 
-Use these skills when Squad is operating its own mission product lifecycle:
-context discovery, mission definition, task operation, overview readback, and
-post-mission review.
+Use these skills when a Squad-style product is operating a mission or work-program
+lifecycle: context discovery, mission definition, task operation, overview
+readback, and post-mission review.
 
 Skills:
 
@@ -35,15 +35,19 @@ The operating model is:
 Mission skills are behavior programs for agents. They do not own Squad product
 truth.
 
-Truth must come from:
+Truth must come from the host product's canonical workflow owner:
 
 - mission lifecycle tools;
 - canonical commands and events;
-- `mission_current_state`;
-- `mission.get_operating_context`;
+- current-state read models;
+- operating-context queries;
 - task/proof/review read models;
-- DB-backed telemetry and runtime-proof queries;
+- `db_runtime` telemetry and `<proof_query>` surfaces;
 - final receipts and artifacts.
+
+In Squad, those concepts may map to names such as `mission_current_state` and
+`mission.get_operating_context`, but public users should ask their agent to fill
+the equivalent names from their own codebase.
 
 ## Flow Map
 

@@ -122,17 +122,17 @@ From the selected review worktree:
 1. Run `pnpm install` if dependencies may be stale.
 2. Choose the narrowest truthful dev command:
    - `pnpm dev` for full-stack desktop plus API review
-   - `pnpm dev:desktop` for desktop-only review
+   - `<RUNTIME_COMMAND_DESKTOP>` for desktop-only review
    - `pnpm dev:api` for API-only runtime inspection
-3. If the ticket depends on Supabase-backed local runtime, ensure the repo's normal dev entrypoint handles it or start the required local services explicitly.
+3. If the ticket depends on `db_runtime`-backed local runtime, ensure the repo's normal dev entrypoint handles it or start the required local services explicitly.
 
 DB-proof prep rule:
 
 - decide explicitly whether this ticket needs DB-backed proof before you hand anything to the human
-- if the seam touches durable canonical truth, prefer the Supabase-backed path over an in-memory
+- if the seam touches durable canonical truth, prefer the `db_runtime`-backed path over an in-memory
   fallback for the review runtime
 - if only hermetic in-memory tests ran so far, treat the ticket as not yet ready for final signoff
-- when the ticket uses live Linear review routing, keep the `needs:db-proof` label and `## DB Verification`
+- when the ticket uses live `issue_tracker` review routing, keep the `needs:db-proof` label and `## DB Verification`
   block aligned with the actual runtime proof
 
 Preferred default for user-facing tickets: `pnpm dev` from the review worktree root.

@@ -1,19 +1,19 @@
 ---
 name: beta-release-assist
-description: "Use when a merged Squad slice is ready for delivery work and we need the post-merge beta release workflow: deploy-readiness verification, artifact and manifest checks, updater feed verification, release-note assembly, human-triggered release handoff, and rollback or re-release receipts."
+description: "Use when a merged Squad slice or Squad-style release candidate is ready for delivery work: deploy-readiness verification, artifact and manifest checks, updater feed verification, release-note assembly, human-triggered release handoff, and rollback or re-release receipts."
 ---
 
 # Beta Release Assist
 
 Use this skill for **post-merge delivery work**, not for implementing product tickets.
 
-This skill owns the release-assist loop for the first external beta:
+This skill owns the release-assist loop for the target release exposure:
 
 - verify deploy readiness
 - verify artifacts and manifests
 - verify updater feed health
 - prepare release notes and operator handoff
-- support human-triggered beta release
+- support human-triggered exposure
 - record rollback or re-release posture
 
 Do not use this skill for:
@@ -26,28 +26,32 @@ Do not use this skill for:
 
 - target version or release tag
 - merged commit SHA
-- release channel
+- release channel or staged exposure target
 - deploy-readiness report
 - deploy-seam truth verdict
 - CI result
 - required test result
 - human review receipt
 - artifact locations
-- updater feed URL and verification endpoints
+- configured `updater_feed` URL and verification endpoints
 - human release decision owner
 - explicit human deploy intent
 
-Start by reading:
+Start by resolving the reader's release authority inputs. Ask the agent to fill these from the
+current codebase and release process:
 
-- `/Users/danialhasan/dev/squad/canon/21-cicd-and-delivery-model.md`
-- `/Users/danialhasan/dev/squad/docs/canon-proposals/section-21-delivery-autoupdate-v1-lock.md`
-- `/Users/danialhasan/dev/squad/docs/execution-system/delivery-autoupdate-lowering.md`
-- `/Users/danialhasan/dev/squad/docs/execution-system/manifests/delivery-ticket-manifest.json`
+- `<release_policy_ref>` for release gates, approval boundaries, rollback rules, and exposure policy
+- CI/deploy manifests for the target release path
+- `<artifact_host>` for packaged artifacts, checksums, signatures, and publication state
+- `<updater_feed>` for release metadata, channel pointers, and compatibility endpoints
+- release channels and staged rollout rules
+- rollback or re-release policy
+- proof gates and `<proof_query>` surfaces required before exposure
 
 Read these references from this skill when needed:
 
 - `references/release-receipt-checklist.md` for required release receipts
-- `references/v1-delivery-source-map.md` for old-repo salvage context and behavior to preserve
+- `references/v1-delivery-source-map.md` for optional legacy delivery behavior to preserve
 - `../ticket-day-operator/references/deploy-truth-and-cadence.md` when the actual deploy entrypoint,
   cadence, or fallback posture is unclear
 
@@ -57,7 +61,7 @@ Read these references from this skill when needed:
 
 - identify the merged slice or slices included in the release
 - identify the exact version or tag being exposed
-- confirm whether this is initial beta exposure, re-release, or rollback follow-up
+- confirm whether this is initial exposure, staged rollout, re-release, or rollback follow-up
 
 Stop if:
 
@@ -81,7 +85,7 @@ Assemble one deploy-readiness packet with:
 - required test status
 - human review status
 - artifact status
-- updater feed status
+- `updater_feed` status
 - human-trigger eligibility
 
 This packet is the core handoff object for the human release decision.
@@ -131,7 +135,7 @@ Assemble the human-trigger packet with:
 - version/tag
 - merged commit
 - included slices
-- canon alignment summary
+- source-of-truth alignment summary
 - product-surface change summary
 - deploy-readiness result
 - updater verification result
@@ -160,7 +164,7 @@ This skill is delivery-focused, so it should explicitly consider:
 - feed verification
 - smoke where it protects updater behavior
 - runtime telemetry and release receipts
-- the canonical predeploy gate from Section `21`
+- the configured `<release_policy_ref>` predeploy gate
 
 It should not invent new bureaucracy or second-guess product truth already verified elsewhere.
 

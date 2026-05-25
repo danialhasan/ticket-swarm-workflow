@@ -1,27 +1,29 @@
 # Source Priority
 
-Use this reference when Slack, meetings, Linear, and canon disagree or overlap.
+Use this reference when `team_chat`, meetings, the `issue_tracker`, and source-of-truth docs
+disagree or overlap.
 
 ## Priority order
 
-1. canon and explicit human decisions
-2. live Linear state, especially holding epics and current project scope
-3. recent Slack or meeting decisions with clear authorship
+1. source-of-truth docs and explicit human decisions
+2. live `issue_tracker` state, especially holding epics and current project scope
+3. recent `team_chat` or meeting decisions with clear authorship
 4. older brainstorm notes, exports, and local summaries
 
 ## Dedupe targets
 
-Check candidate ideas against these existing holding epics first:
+Ask the reader's agent to fill this section from the configured `issue_tracker`.
+Use synthetic examples in public docs:
 
-- `SQD-647` broader integrations beyond local + GitHub
-- `SQD-649` multi-user collaboration, shared review, and governance
-- `SQD-650` rich memory product and knowledge-browsing surfaces
-- `SQD-651` generalized skills platform and composition framework
-- `SQD-652` advanced analytics, governance surfaces, and enterprise rollout
-- `SQD-653` expanded mission taxonomy and route/control generalization
+- `ISSUE-101` broader integrations beyond the current release surface
+- `ISSUE-102` multi-user collaboration, shared review, and governance
+- `ISSUE-103` richer memory product and knowledge-browsing surfaces
+- `ISSUE-104` generalized skills platform and composition framework
+- `ISSUE-105` analytics, governance surfaces, and enterprise rollout
+- `ISSUE-106` expanded mission taxonomy and route/control generalization
 
 ## Conflict rules
 
-- if canon says the area is cut from beta, do not silently promote it into scope because Slack was excited
+- if the source-of-truth docs say the area is cut from beta, do not silently promote it into scope because chat was excited
 - if an idea maps to an existing holding epic, extend that row instead of creating a new family
 - if a recent human decision reverses an older brainstorm, preserve the history but update the current classification

@@ -33,7 +33,7 @@ Do not use this skill when:
   - ready-now Todo child issues
   - dependency-blocked child issues
 - candidate tickets with identifiers, parents, blockers, and likely close effort
-- today's Google Calendar events and free windows
+- today's `calendar_provider` events and free windows
 - repo path and current branch
 - desired deploy boundary or gate
 - any shifted schedule assumption such as "started one business day late"
@@ -43,8 +43,8 @@ Start by reading:
 - `references/hourly-kill-plan.md`
 - `references/shifted-schedule-math.md`
 - `references/deploy-truth-and-cadence.md`
-- `/Users/danialhasan/dev/squad/plugins/ticket-swarm-workflow/skills/ticket-to-human-review/SKILL.md`
-- `/Users/danialhasan/dev/squad/plugins/ticket-swarm-workflow/skills/beta-release-assist/SKILL.md` when release work may happen today
+- `../ticket-to-human-review/SKILL.md`
+- `../beta-release-assist/SKILL.md` when release work may happen today
 
 ## Goal
 
@@ -62,7 +62,7 @@ Produce one execution-day packet with:
 
 ### 1. Read calendar truth first
 
-Use Google Calendar through Composio.
+Use the configured `calendar_provider` adapter.
 
 Required reads:
 

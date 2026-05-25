@@ -4,13 +4,13 @@ Use this reference when composing the ledger skill into an automation.
 
 ## Good cadences
 
-- nightly when Slack and Linear move quickly
+- nightly when `team_chat` and `issue_tracker` move quickly
 - weekly when roadmap churn is lower
 
 ## Automation loop
 
 1. read the current ledger
-2. gather new Slack, meeting, and Linear inputs since the last pass
+2. gather new `team_chat`, meeting, and `issue_tracker` inputs since the last pass
 3. normalize ideas into candidate rows
 4. dedupe against canon cuts, holding epics, and current ledger rows
 5. update only the rows whose source truth changed

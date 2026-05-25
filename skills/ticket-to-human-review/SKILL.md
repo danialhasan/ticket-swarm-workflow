@@ -44,8 +44,8 @@ is implemented, verified, merged, deployed, or released.
 Start by reading:
 
 - the implementation contract packet
-- `/Users/danialhasan/dev/squad/plugins/ticket-swarm-workflow/skills/implementation-contract-conveyor/SKILL.md`
-- `/Users/danialhasan/dev/squad/plugins/ticket-swarm-workflow/skills/design-contract-conveyor/SKILL.md`
+- `../implementation-contract-conveyor/SKILL.md`
+- `../design-contract-conveyor/SKILL.md`
 - `.codex/skills/multi-agent-workflow/SKILL.md`
 - `.codex/skills/layered-verification/SKILL.md`
 

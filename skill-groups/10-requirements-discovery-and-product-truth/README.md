@@ -8,7 +8,7 @@ Skills:
 
 - `feature-decision-ledger`: durable beta thesis, non-goals, parking-lot,
   kill-list, and undecided feature hygiene.
-- `annotation-reconciliation-guard`: turns Danial's live annotations into hard
+- `annotation-reconciliation-guard`: turns live product annotations or reviewer notes into hard
   reconciliation rows before readiness can be claimed.
 - `ui-abstraction-guard`: catches repeated UI/product abstraction failures so
   they become proactive rules, scans, contracts, or checks.

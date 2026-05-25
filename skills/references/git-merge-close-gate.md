@@ -15,7 +15,7 @@ The close sequence is:
 2. the surviving integration branch is reconciled if needed
 3. that ticket branch is merged into local `main`
 4. the required proof is rerun from root `main`
-5. only after root `main` is green may Linear move to `Done`
+5. only after root `main` is green may `issue_tracker` move to `Done`
 
 ## Minimum mainline proof
 
@@ -41,9 +41,10 @@ If the merge lands on `main` but root-main proof fails:
 
 Never let `Done` mean "human liked it, but main is red."
 
-## Linear rule
+## Issue Tracker Rule
 
-Human signoff and Linear `Done` are no longer the same moment.
+Human signoff and the `issue_tracker` terminal `Done` state are no longer the
+same moment.
 
 Use this split:
 

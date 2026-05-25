@@ -1,89 +1,75 @@
-# Mission Runtime Code Map
+# Mission Runtime Code Map Template
 
 Use this reference when a mission lifecycle skill needs to bind behavior to the
-current Squad runtime instead of inventing a new workflow surface.
+host product runtime instead of inventing a new workflow surface.
+
+Ask the reader's agent to fill this map from the reader's own codebase. Squad
+uses this shape publicly to show how mission runtime truth should be grounded,
+but the concrete paths, tool ids, database objects, and query names belong to
+each host product.
 
 ## Agent-Facing Mission Tools
 
-Primary source: `apps/api/src/agent-chat-tool-registry.ts`.
+Primary tool registry: `<PROJECT_ROOT>/<path-to-agent-tool-registry>`.
 
 Active mission lifecycle and read tools:
 
-- `mission.propose`: non-canonical draft proposal only.
-- `mission.status`: concise canonical status readback.
-- `mission.get_operating_context`: API-owned packet for mission, task, blocker,
-  proof, review, runtime, worker, subagent, governance, and source freshness.
-- `mission.discover`: canonical mission discovery from work intake or grounded
-  user problem.
-- `mission.define`: canonical mission definition and task-plan admission bridge.
-- `mission.select_route_control`: canonical execution route and control posture.
-- `mission.propose_authority_packet`: canonical pending authority packet.
-- `mission.prepare_kickoff`: canonical kickoff preparation against an execution
-  grant.
-- `mission.start_run`: canonical mission orchestration run start.
-- `mission.record_runtime_result`: runtime output admission for task evidence,
+- `<mission_propose_tool>`: draft proposal or mission-intent candidate.
+- `<mission_status_tool>`: concise status readback.
+- `<mission_operating_context_tool>`: packet for mission, task, blocker, proof,
+  review, runtime, worker, subagent, governance, and source freshness.
+- `<mission_discover_tool>`: mission discovery from work intake or grounded user
+  problem.
+- `<mission_define_tool>`: mission definition and task-plan admission bridge.
+- `<mission_route_control_tool>`: execution route and control posture.
+- `<mission_authority_packet_tool>`: pending authority or permission packet.
+- `<mission_kickoff_tool>`: kickoff preparation against an execution grant.
+- `<mission_start_run_tool>`: mission orchestration run start.
+- `<mission_record_result_tool>`: runtime output admission for task evidence,
   receipts, artifacts, and verification posture.
-- `mission.report_blocker`: canonical mission blocker recording.
-- `mission.resolve_blocker`: canonical mission blocker clearing.
+- `<mission_report_blocker_tool>` and `<mission_resolve_blocker_tool>`: blocker
+  lifecycle tools.
 
-Agent and workspace tools that commonly compose with missions:
-
-- `workspace.inspect`, `repo.search`, `file.read`, `git.status`, `git.diff`
-- `context.readiness`, `connectors.search`
-- `external.search_tools`, `external.get_schemas`, `external.manage_connection`,
-  `external.execute`
-- `agent.spawn`, `agent.send_input`, `agent.wait`, `agent.close`
-- `shell.run`, `exec_command`, `write_stdin`, `apply_patch`, `file.write`,
-  `git.mutate`
+Common composing tools may include repo search, file read, git status, connector
+schemas, external tool execution, subagent control, shell commands, and patch
+application. The exact tool names should come from the host runtime.
 
 ## Command And Contract Anchors
 
-- Contracts: `packages/contracts/src/missions.ts`,
-  `packages/contracts/src/mission-operating-context.ts`,
-  `packages/contracts/src/mission-current-state.ts`,
-  `packages/contracts/src/governance.ts`.
-- Domain schemas: `packages/domain/src/mission.ts`,
-  `packages/domain/src/governance.ts`.
-- Mission handler/admission logic:
-  `packages/control-plane/src/mission-handlers.ts`,
-  `packages/control-plane/src/mission-start-events.ts`.
-- Persistence and events: `apps/api/src/persistence.ts` records accepted,
-  rejected, blocked, canonical event, projection, and telemetry facts.
-- Runtime worker context: `apps/api/src/mission-operating-context.ts`.
-- Workflow bundle registry: `apps/api/src/workflow-bundle-registry.ts` and
-  `workflow-bundles/ticket-swarm-workflow.json`.
-- Mission worker prompt/nudge path: `apps/api/src/app.ts`.
-- Subagent contract store and governance classification:
-  `apps/api/src/agent-chat-subagents.ts`.
-- Runtime telemetry and proof: `packages/telemetry/src/runtime-boundary.ts`,
-  `packages/telemetry/src/runtime-proof.ts`,
-  `packages/telemetry/src/projection-query-realtime.ts`.
+Ask the reader's agent to fill:
+
+- contracts and shared types: `<PROJECT_ROOT>/<path-to-contracts>`;
+- domain schemas: `<PROJECT_ROOT>/<path-to-domain-schemas>`;
+- command/admission handlers: `<PROJECT_ROOT>/<path-to-control-plane-handlers>`;
+- persistence, events, projections, and telemetry: `<PROJECT_ROOT>/<path-to-persistence>`;
+- worker or operating-context assembly: `<PROJECT_ROOT>/<path-to-runtime-context>`;
+- workflow bundle registry: `<PROJECT_ROOT>/<path-to-workflow-registry>`;
+- subagent or worker governance: `<PROJECT_ROOT>/<path-to-governance-runtime>`;
+- runtime telemetry and proof queries: `<PROJECT_ROOT>/<path-to-runtime-proof>`.
 
 ## Frontend Mission Surfaces
 
-- Mission overview/control: `apps/desktop/src/renderer/src/pages/MissionControlPage.vue`,
-  `apps/desktop/src/renderer/src/pages/MissionPage.vue`,
-  `apps/desktop/src/renderer/src/pages/MissionsPage.vue`.
-- Mission components:
-  `apps/desktop/src/renderer/src/components/squad/mission/`.
-- Chat mission cards and generated UI carriers:
-  `apps/desktop/src/renderer/src/pages/ChatPage.vue`,
-  `apps/desktop/src/renderer/src/lib/agent-chat-ai-sdk.ts`,
-  `apps/desktop/src/renderer/src/lib/agent-chat-inline-parts.ts`.
+Ask the reader's agent to fill:
+
+- mission overview/control surface: `<PROJECT_ROOT>/<path-to-mission-overview>`;
+- mission detail or task surface: `<PROJECT_ROOT>/<path-to-mission-detail>`;
+- mission component directory: `<PROJECT_ROOT>/<path-to-mission-components>`;
+- chat or generated UI carriers: `<PROJECT_ROOT>/<path-to-chat-or-generated-ui>`.
 
 ## Authority Boundary
 
 Skills do not own product truth. They instruct the agent how to use the runtime.
 
-Product truth must come from:
+Product truth must come from the host product's canonical workflow owner:
 
 - canonical commands and admissions;
-- `public.canonical_events`;
-- `public.telemetry_records`;
-- projections such as `mission_current_state`;
-- API read models such as `mission.get_operating_context`;
-- proof/review query surfaces.
+- canonical event storage;
+- `db_runtime` telemetry records;
+- current-state projections;
+- operating-context read models;
+- proof/review query surfaces;
+- final receipts and artifacts.
 
 Do not treat model prose, a transcript, a subagent status, a screenshot, or a
 workflow runtime status as mission/task/proof truth unless it has re-entered
-through the canonical surfaces above.
+through the host product's canonical surfaces.

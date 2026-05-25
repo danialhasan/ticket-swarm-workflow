@@ -79,7 +79,7 @@ Use for:
 
 Skip when the seam is fully internal and has no operator-visible consequence.
 
-## Electron MCP / UI green pass
+## `ui_automation_driver` / UI green pass
 
 Use for:
 

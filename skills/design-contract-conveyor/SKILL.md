@@ -10,7 +10,7 @@ this skill only when the selected next move is to convert live human design
 steering into durable Design Contract truth.
 
 Use this skill when a Squad frontend route or state needs to move from live
-human design steering into execution-ready Linear work.
+human design steering into execution-ready `issue_tracker` work.
 
 This skill sits before `$implementation-contract-conveyor`. It captures human
 taste and product signoff first, then hands approved design truth to
@@ -23,7 +23,7 @@ Turn this loop into a repeatable operating system:
 ```text
 references + live browser context
   -> generated design pass
-  -> Danial steers
+  -> reviewer steers
   -> Codex records Design Contract truth
   -> approved cluster becomes implementation-contract input
   -> implementation-contract compilation
@@ -38,7 +38,7 @@ For the compact skill contract shared across this plugin, see
 ## Required Inputs
 
 - active route or route-state
-- Design Contract Linear issue, or parent issue for creating one
+- Design Contract `issue_tracker` issue, or parent issue for creating one
 - current session plan or walkthrough file
 - medium-fi ASCII packet or route/state tree
 - relevant prior design packets, screenshots, annotations, or browser receipts
@@ -65,7 +65,7 @@ Load these only when the current design-contract pass needs them:
 
 For local Squad UI walkthroughs, use `@browser-use` with the Codex in-app
 browser. Do not use `agent-browser`, `agent-browser-work`, Playwright-driven
-Chrome profiles, or `dev-browser` unless Danial explicitly asks for that
+Chrome profiles, or `dev-browser` unless the configured product reviewer explicitly asks for that
 fallback in the current thread.
 
 ## Phase 1: Context Intake
@@ -96,7 +96,7 @@ this phase.
 
 ## Phase 2: Generate
 
-Create or patch the smallest live UI state that can carry Danial's feedback.
+Create or patch the smallest live UI state that can carry reviewer feedback.
 
 Default generation rules:
 
@@ -115,7 +115,7 @@ human steering.
 
 ## Phase 3: Human Steering
 
-Danial reviews the live route/state through `@browser-use` annotations,
+The configured product reviewer reviews the live route/state through `@browser-use` annotations,
 screenshots, and direct feedback.
 
 Codex should translate feedback into reusable design rules, not isolated tweaks.
@@ -135,7 +135,7 @@ the next reaction when implementation mode is allowed.
 
 ## Phase 4: Learn And Record
 
-After every `@browser-use` design checkpoint, Codex owns Linear and filesystem
+After every `@browser-use` design checkpoint, Codex owns `issue_tracker` and filesystem
 hygiene.
 
 Update the relevant Design Contract ticket with:
@@ -151,7 +151,7 @@ Update the relevant Design Contract ticket with:
 Update the durable session file with:
 
 - route/state reviewed
-- Linear issue id
+- `issue_tracker` issue id
 - decision and product rule
 - receipt path
 - next route/state
@@ -204,7 +204,7 @@ through the composed workflow named by the implementation contract.
 This skill is complete for a route/state only when:
 
 - the live browser review surface was inspected or generated
-- Danial's feedback was converted into explicit design rules
+- reviewer feedback was converted into explicit design rules
 - the Design Contract ticket was updated
 - receipt references were saved
 - the session progress log was updated

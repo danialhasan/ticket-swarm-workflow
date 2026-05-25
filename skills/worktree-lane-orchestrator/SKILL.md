@@ -25,7 +25,7 @@ Do not use this skill when:
 - lane map with lane names, owners, and file surfaces
 - which lanes are mutating, runtime-booting, or read-only
 - any reserved ports or env collisions that need lane isolation
-- any serialized runtime resources, especially Electron MCP verification
+- any serialized runtime resources, especially `ui_automation_driver` verification
 - receipt destination
 
 Start by reading:
@@ -84,15 +84,15 @@ Record any lane-local runtime constraints in the worktree matrix:
 - debug ports
 - output directories
 - environment variables that must differ per lane
-- exclusive runtime resources such as Electron MCP verification
+- exclusive runtime resources such as `ui_automation_driver` verification
 
 If two lanes would collide at runtime, stop and re-scope before implementation starts.
 
 Rules:
 
 - installs, tests, builds, and local runtime commands for a ticket run from that ticket's worktree
-- Electron MCP verification is serialized even when tickets otherwise execute in parallel
-- if multiple tickets need Electron MCP proof, queue those verifier lanes instead of running them together
+- `ui_automation_driver` verification is serialized even when tickets otherwise execute in parallel
+- if multiple tickets need `ui_automation_driver` proof, queue those verifier lanes instead of running them together
 
 ### 5. Emit the worktree matrix receipt
 

@@ -53,46 +53,47 @@ non-Squad or client-facing workflows need their own upstream router for
 opportunity mapping, pilot slicing, data boundaries, workflow automation, and
 consulting proof. Until then, keep the implementation rail here.
 
-Flywheel is the default research control plane for repeated Squad harness
+Use the configured `research_control_plane` for repeated Squad harness
 optimization, hillclimbing, scorer/judge iteration, prompt/tool/skill search,
 or applied-AI frontier planning. Use this skill to name the harness behavior
-claim, proof surface, and promotion boundary; use Flywheel to preserve the
-research question, hypothesis tree, comparator, evidence artifacts, budget,
-stop condition, interpretation, and next branch.
+claim, proof surface, and promotion boundary; use the research control plane to
+preserve the research question, hypothesis tree, comparator, evidence
+artifacts, budget, stop condition, interpretation, and next branch.
 
 Framework boundaries:
 
-- Flywheel research control plane: default for hypothesis tracking, graph
+- `research_control_plane`: hypothesis tracking, graph
   topology, artifact mapping, budgeted frontier planning, explicit stop
   conditions, and lookahead decisions across runs.
 - Runner-framework adoption: not an active branch in this workflow. Local
   runners, package scripts, and filesystem receipts remain the execution/proof
   substrate. Any future runner-framework proposal needs a separate explicit
-  adoption plan, parity oracle, adapter proof, rollback, and Danial approval
+  adoption plan, parity oracle, adapter proof, rollback, and reviewer approval
   before it can re-enter the active path.
 - New repeated non-Squad pattern: propose a standalone skill/plugin branch with
   actor, workflow, source system, write boundary, and proof surface.
 
 Do not let a framework choice become the product claim. The claim remains the
-behavior change and the evidence that proves it. Flywheel nodes summarize and
-route research; they do not replace local receipts, scorers, canaries, app-origin
-proof, canonical events, DB-backed telemetry, or product-runtime promotion
-approval.
+behavior change and the evidence that proves it. Research-control-plane nodes
+summarize and route research; they do not replace local receipts, scorers,
+canaries, app-origin proof, canonical events, DB-backed telemetry, or
+product-runtime promotion approval.
 
-Generated DSA docs for this workflow live at
-`docs/operations/harness-optimization-dsa/index.html`. When a harness change
-alters candidate schemas, scorer outputs, mutation algorithms, promotion gates,
-runtime bridge contracts, proof vocabulary, or this skill's operating rail, run
-`pnpm docs:harness-dsa`, `pnpm docs:harness-dsa:check`, and
-`node --test tests/harness-dsa-docs.test.mjs`. Edit source contracts or
-`scripts/build-harness-dsa-docs.mjs`, not generated HTML.
+If the host repo has generated harness-design docs, ask the reader's agent to
+fill `<HARNESS_DOCS_REF>`, `<HARNESS_DOCS_BUILD_COMMAND>`, and
+`<HARNESS_DOCS_CHECK_COMMAND>` from that codebase. When a harness change alters
+candidate schemas, scorer outputs, mutation algorithms, promotion gates,
+runtime bridge contracts, proof vocabulary, or this skill's operating rail,
+update source contracts and regenerated docs together.
 
-## LangSmith Dataset Mirror
+## Eval Mirror
 
-Repo-owned harness datasets may be mirrored into LangSmith only as projected
+Repo-owned harness datasets may be mirrored into the configured `eval_mirror` only as projected
 review/eval examples. The repo remains authoritative for case text, schemas,
-scorers, fixture labels, promotion gates, receipts, and non-claims. LangSmith is
-not canonical truth and does not emit canonical events for dataset sync.
+scorers, fixture labels, promotion gates, receipts, and non-claims. The
+`eval_mirror` is not canonical truth and does not emit canonical events for
+dataset sync. Examples include Braintrust, LangSmith, W&B Weave, Arize/Phoenix,
+Humanloop, or a repo-owned eval exporter.
 
 Use this rail for selected cases:
 
@@ -100,32 +101,30 @@ Use this rail for selected cases:
 repo dataset pack
 -> validate/score locally
 -> project selected manifest rows
--> upsert LangSmith examples
+-> upsert eval-mirror examples
 -> write sync receipt
 ```
 
-Start with
-`docs/operations/datasets/langsmith-sync/pilotv2-rich-reward.manifest.json`;
-do not mirror the full pack by default. Commands:
+Ask the reader's agent to fill `<EVAL_MIRROR_MANIFEST>` and the local commands
+from the host repo. Do not mirror the full pack by default. Example command
+roles:
 
 ```text
-pnpm dataset:pilotv2:validate
-pnpm dataset:pilotv2:score
-pnpm dataset:langsmith:check
-pnpm dataset:langsmith:apply
-pnpm dataset:langsmith:receipt
+<EVAL_DATASET_VALIDATE_COMMAND>
+<EVAL_DATASET_SCORE_COMMAND>
+<EVAL_MIRROR_CHECK_COMMAND>
+<EVAL_MIRROR_APPLY_COMMAND>
+<EVAL_MIRROR_RECEIPT_COMMAND>
 ```
 
-`dataset:langsmith:check` is the CI-safe command. `dataset:langsmith:apply`
-requires `LANGSMITH_API_KEY` and, for org-scoped keys, `LANGSMITH_WORKSPACE_ID`.
-Workspace display names such as `Workspace 1` are not accepted by the SDK; use
-the workspace UUID. Apply should run only from a trusted manual or scheduled
-main-branch sync. Never delete LangSmith examples by default; stale repo-owned
-examples must be marked `sync_state: "stale"` or moved to an archived split by
-the sync script.
+The check command should be CI-safe. The apply command may require configured
+eval-mirror credentials. Apply should run only from a trusted manual or
+scheduled main-branch sync. Never delete mirrored examples by default; stale
+repo-owned examples should be marked `sync_state: "stale"` or moved to an
+archived split by the sync script.
 
-Every LangSmith-backed harness receipt must cite the dataset sync receipt or
-state why the mirror was not used. A LangSmith example, trace, or run id is not
+Every `eval_mirror`-backed harness receipt must cite the dataset sync receipt or
+state why the mirror was not used. An `eval_mirror` example, trace, or run id is not
 promotion proof unless the separate runtime/canonical/DB proof surfaces required
 by the claim are also present.
 
@@ -181,7 +180,7 @@ parallel candidate generation, critique, failure clustering, fixture mutation
 proposals, scorer stress tests, reward ablations, trace comparison, receipt
 synthesis, and adversarial search for reward hacking. Do not use compute for
 random prompt spam, uncontrolled rewrites, scope expansion without gates,
-scoreboard mutation, premature case expansion, or dumping huge traces on Danial.
+scoreboard mutation, premature case expansion, or dumping huge traces on the configured product reviewer.
 
 Every optimization artifact must attach to refs: `candidate_ref`, `case_ref`,
 `assertion_ref`, `fixture_ref`, `failure_code`, or `receipt_ref`. No unattached
@@ -231,7 +230,7 @@ prose blobs.
   governance posture.
 - Dataset target: golden, regression, challenge, canary, trajectory, or
   app-origin baseline.
-- LangSmith mirror posture when selected examples are used: manifest path,
+- `eval_mirror` posture when selected examples are used: manifest path,
   dataset name, sync receipt ref, and whether the check/apply readback was
   local-only or remote-checked.
 - Required proof surface: deterministic scorer, semantic judge, product UI
@@ -246,12 +245,12 @@ prose blobs.
   that is not a primitive equality/count/order/containment check.
 - Hillclimb mutation scope when the dataset will select or promote candidates.
 - Persisted product context refs when a harness decision needs product judgment.
-- Flywheel research root or explicit local-only reason for any repeated
+- `research_control_plane` root or explicit local-only reason for any repeated
   optimization, multi-run comparison, or frontier-planning pass.
-- Flywheel experiment brief: research question, hypothesis, comparator, unit of
+- `research_control_plane` experiment brief: research question, hypothesis, comparator, unit of
   work, primary observable, artifact plan, budget cap, stop condition,
   interpretation rule, and next branch if inconclusive.
-- Flywheel graph topology plan: parent insight node, empirical run node,
+- `research_control_plane` graph topology plan: parent insight node, empirical run node,
   optional checkpoint/winner nodes, artifact refs, and raw-trace redaction
   policy.
 - Receipt destination.
@@ -271,32 +270,31 @@ generation pass, semantic judge pass, or no-promotion/promotion plan, apply
 before changing behavior or recommending promotion.
 
 When the pass is repeated, comparative, multi-run, or intended to guide future
-agents, continue or create the Flywheel research root before execution. Keep
-local receipts as the proof source and record the Flywheel node refs in the
-receipt.
+agents, continue or create the `research_control_plane` root before execution. Keep
+local receipts as the proof source and record the research node refs in the receipt.
 
 Use the taxonomy to decide whether this pass is:
 
 - core harness loop inside this skill;
 - handoff to an existing Ticket Swarm skill;
 - a reference-only design task;
-- a Flywheel-controlled research branch with runner-framework adoption held out
+- a `research_control_plane`-controlled research branch with runner-framework adoption held out
   of active scope;
 - or a candidate for a future standalone applied-AI plugin.
 
 ## Product Intent Inference Protocol
 
 When harness engineering needs product judgment, first infer the decision from
-persisted product context before asking Danial. Cite source context, assign
+persisted product context before asking the configured product reviewer. Cite source context, assign
 confidence, and proceed only when confidence is high and the action stays inside
 eval-only/no-promotion harness work.
 
 Routine product decisions should not be escalated when they are already implied
 by persisted context such as product walkthroughs, Goal reports, workstream split
 notes, pilot profiles, approval packets, requirements gates, source maps, and
-prior Danial approvals in receipts.
+prior reviewer approvals in receipts.
 
-Ask Danial, or stop at HOLD, when:
+Ask the configured product reviewer, or stop at HOLD, when:
 
 - context is missing or contradictory;
 - the decision changes promotion-bearing scope;
@@ -315,21 +313,21 @@ product_intent_inference:
     - "<path or receipt ref>"
   reasoning_summary: "<why the sources imply the decision>"
   confidence: "high | medium | low"
-  action_taken: "<proceeded | drafted proposal | held | asked Danial>"
+  action_taken: "<proceeded | drafted proposal | held | asked reviewer>"
   human_approval_required: true | false
   non_claims:
     - "<what this decision does not prove or authorize>"
 ```
 
-For Goal 2, apply the detailed protocol in
-`docs/operations/sessions/2026-05-20/goal-2-dataset-approval-pack/product-intent-inference-protocol.md`.
+For `<ACTIVE_HARNESS_GOAL>`, ask the reader's agent to fill
+`<HARNESS_GOAL_PROTOCOL_REF>` from the host repo before promotion.
 
 ## Workflow
 
 ### 0. Open The Research Control Plane
 
 For repeated harness research, hillclimbing, scorer/judge iteration, or
-frontier planning, establish the Flywheel control-plane node before execution:
+frontier planning, establish the `research_control_plane` node before execution:
 
 - root or parent insight node;
 - empirical run node or planned child branch;
@@ -338,8 +336,8 @@ frontier planning, establish the Flywheel control-plane node before execution:
 - budget cap and stop condition;
 - next branch if inconclusive.
 
-Use local receipts for proof and Flywheel for topology. If Flywheel cannot be
-used, record `FLYWHEEL_HELD` with the reason before continuing local-only.
+Use local receipts for proof and `research_control_plane` for topology. If `research_control_plane` cannot be
+used, record `RESEARCH_CONTROL_PLANE_HELD` with the reason before continuing local-only.
 
 ### 1. State The Behavior Claim
 
@@ -354,7 +352,7 @@ Examples:
 - "When a user asks for a vague mission, the agent should discover and ask
   focused questions before `mission.define`, proven by tool order and final
   text."
-- "When Linear lookup succeeds with excessive calls, the agent should preserve
+- "When `issue_tracker` lookup succeeds with excessive calls, the agent should preserve
   the same readback with fewer calls, proven by result equivalence and tool
   count reduction."
 - "When a child subagent finds evidence, parent mission truth should not change
@@ -435,12 +433,12 @@ Every case must include:
 Keep suites small until the contract layer is useful. Do not scale to a broad
 benchmark until known-bad traces fail for the expected reason.
 
-Run `pnpm dataset:goal2:validate` for review-mode dataset changes. Run
-`pnpm dataset:goal2:validate -- --mode freeze` before any freeze claim; expected
-freeze failures must stay explicit HOLDs.
+Run `<EVAL_DATASET_VALIDATE_COMMAND>` for review-mode dataset changes. Run
+`<EVAL_DATASET_FREEZE_CHECK_COMMAND>` before any freeze claim; expected freeze
+failures must stay explicit HOLDs.
 
-When fixture refs are materialized for a Goal 2 first-batch case, run
-`pnpm dataset:goal2:score` and keep the case at `fixtures_materialized` until
+When fixture refs are materialized for an `<ACTIVE_HARNESS_GOAL>` first-batch case, run
+`<EVAL_DATASET_SCORE_COMMAND>` and keep the case at `fixtures_materialized` until
 false-positive/false-negative review is recorded. Passing fixture scoring alone
 is not case freeze.
 
@@ -516,10 +514,10 @@ Route based on what changed:
 - Code implementation needed: `implementation-contract-conveyor`.
 - Parallel mutating work: `multi-agent-workflow` or worktree lane skills.
 - Human product/runtime decision: `ticket-human-review-runtime`.
-- Flywheel-backed harness research: update the research node with result,
+- `research_control_plane`-backed harness research: update the research node with result,
   artifact refs, HOLDs, interpretation, non-claims, and next branch. Do not
   route to a runner-framework adapter from this workflow; record such ideas as
-  out-of-scope unless Danial explicitly opens a separate adoption plan.
+  out-of-scope unless the configured product reviewer explicitly opens a separate adoption plan.
 - Applied-AI opportunity outside Squad harness: do not force it here; propose a
   standalone applied-AI plugin or a one-off packet.
 
@@ -540,7 +538,7 @@ Kill or hold the loop when:
 - hillclimbing mutation scope is absent for a candidate-selection dataset;
 - app-origin-required case lacks split backend/app-origin status;
 - scorer/judge tests have not been run for fixtures;
-- Goal 1 fresh all-green is required but absent;
+- <BASELINE_GOAL> fresh all-green is required but absent;
 - a canary or app-origin HOLD is being renamed as green;
 - two prompt/tool patches in a row fail without changing strategy;
 - the scorer cannot identify the first upstream failure;
@@ -551,13 +549,13 @@ Kill or hold the loop when:
 - a child subagent changes mission truth without parent aggregation;
 - a child policy is broader than the parent policy;
 - the default product UI requires humans to inspect raw traces;
-- repeated or multi-run harness research lacks a Flywheel root/run node and no
+- repeated or multi-run harness research lacks a `research_control_plane` root/run node and no
   explicit local-only exception exists;
-- Flywheel graph state contradicts local receipts;
-- Flywheel artifact sync fails for proof-bearing summaries;
-- Flywheel summaries claim product runtime, app-origin, canonical, or DB truth
+- `research_control_plane` graph state contradicts local receipts;
+- `research_control_plane` artifact sync fails for proof-bearing summaries;
+- `research_control_plane` summaries claim product runtime, app-origin, canonical, or DB truth
   that local proof has not established;
-- Flywheel budget or compute approval is missing for managed compute work;
+- `research_control_plane` budget or compute approval is missing for managed compute work;
 - raw trace externalization is unsafe or not approved;
 - the request is really opportunity mapping or consulting strategy, not Squad
   harness behavior.
@@ -577,8 +575,8 @@ Return a harness-engineering packet with:
 - product impact and non-claims;
 - falsification risks: why the winning candidate might be fake, overfit,
   shallow, unable to affect runtime, or still missing product proof;
-- Flywheel node refs, sync status, artifact refs, interpretation, and next
-  branch when Flywheel applies;
+- `research_control_plane` node refs, sync status, artifact refs, interpretation, and next
+  branch when `research_control_plane` applies;
 - product intent inference records when product judgment was needed;
 - next skill or HOLD;
 - receipt path.
@@ -592,14 +590,14 @@ Receipt must include:
 - commands/queries run and pass/fail;
 - app-origin or backend-baseline status;
 - canary and must-not-regress status;
-- Flywheel research root/run refs or explicit local-only reason;
-- Flywheel sync status, artifact refs, preserved HOLDs, and next branch;
+- `research_control_plane` root/run refs or explicit local-only reason;
+- `research_control_plane` sync status, artifact refs, preserved HOLDs, and next branch;
 - promotion-packet falsification risks and required guardrails;
 - human annotation refs when used;
 - product intent inference records when routine product judgment was inferred;
 - telemetry/canonical applicability note.
 
-Flywheel-backed harness receipts must expose the research sync fields by name:
+`research_control_plane`-backed harness receipts must expose the research sync fields by name:
 
 ```yaml
 flywheelRoot:
@@ -611,11 +609,11 @@ flywheelNodeRefs:
 artifactIndex:
   path: "<local artifact index path>"
   artifact_ids:
-    - "<optional Flywheel artifact id>"
+    - "<optional `research_control_plane` artifact id>"
 syncStatus: "synced | held | not_applicable"
 holdBoundary:
   - "<claim or proof surface still HOLD>"
-nextBranch: "<next Flywheel branch or explicit none>"
+nextBranch: "<next `research_control_plane` branch or explicit none>"
 ```
 
 Canonical events are not emitted for harness eval activity by default. If a

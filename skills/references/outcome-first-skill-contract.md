@@ -21,7 +21,7 @@ Each skill should answer these six questions before detailed process:
 - Let the model choose local tactics unless exact sequencing protects product
   truth, permissions, safety, or verification.
 - Prefer one primary workflow per pass.
-- Avoid repeating generic receipt, Linear, proof, and stop rules in every
+- Avoid repeating generic receipt, `issue_tracker`, proof, and stop rules in every
   skill; link to shared references when the same rule applies.
 - Keep primary product claims stricter than implementation progress claims.
 

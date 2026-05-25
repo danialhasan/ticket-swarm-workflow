@@ -24,7 +24,7 @@ Start by reading:
 
 - the worktree matrix receipt
 - `references/reconcile-checklist.md`
-- `/Users/danialhasan/dev/squad/plugins/ticket-swarm-workflow/skills/references/git-merge-close-gate.md`
+- `../references/git-merge-close-gate.md`
 
 ## Workflow
 

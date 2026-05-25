@@ -23,12 +23,16 @@ Check:
 
 ## Cadence policy
 
-Default Squad cadence:
+Default project cadence:
 
 - local proof per ticket
 - first integration deploy after one vertical seam is real
 - final deploy at the gate boundary or end-of-day proof point
 - beta exposure remains human-triggered
+
+Ask the reader's agent to replace this default with the host product's release
+cadence, human approval boundary, deploy frequency, and proof gates before
+promising a rhythm.
 
 Do not promise deploy-after-each-ticket unless:
 

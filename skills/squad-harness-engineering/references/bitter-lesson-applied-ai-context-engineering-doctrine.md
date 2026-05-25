@@ -22,7 +22,7 @@ It should not be:
 - one perfect handcrafted prompt;
 - one perfect human-designed workflow;
 - one giant prompt stack that manually encodes all behavior;
-- Danial approving every routine micro-judgment.
+- the configured product reviewer approving every routine micro-judgment.
 
 The catch is that compute only helps when the feedback signal is real. More
 compute means more mutation rate. Progress depends on the fidelity of the
@@ -59,22 +59,22 @@ Keep these roles separate:
 
 The harness defines the hill. The optimizer climbs it.
 
-## Repo Authority And LangSmith Mirror Boundary
+## Repo Authority And Eval Mirror Boundary
 
 Repo-owned harness artifacts remain the source of truth for dataset cases,
 schemas, fixture labels, scorers, validators, promotion gates, receipts, and
-non-claims. LangSmith may hold selected projected examples and model I/O
+non-claims. `eval_mirror` may hold selected projected examples and model I/O
 readbacks, but it is a mirror, not an authority layer.
 
-A LangSmith example is valid only when its metadata points back to repo truth:
+An `eval_mirror` example is valid only when its metadata points back to repo truth:
 `authority: "repo"`, `source_pack_ref`, `source_pack_path`, `source_git_sha`,
 `source_key`, `source_case_hash`, `schema_version`, `scorer_ref`,
-`validator_ref`, `proof_surface`, and `selection_reason`. Manual LangSmith edits
+`validator_ref`, `proof_surface`, and `selection_reason`. Manual `eval_mirror` edits
 are overwritten by the repo sync unless they are exported as a repo patch
 proposal first.
 
-Never treat LangSmith dataset state as canonical events, DB telemetry, fixture
-truth, scorer truth, or product-runtime promotion proof. LangSmith can help
+Never treat `eval_mirror` dataset state as canonical events, DB telemetry, fixture
+truth, scorer truth, or product-runtime promotion proof. `eval_mirror` can help
 review model I/O and compare eval examples; product/runtime claims still need
 the separate canonical, DB-backed, app-origin, or human-judgment proof surface
 that the claim requires.
@@ -194,7 +194,7 @@ When product judgment is needed, infer from persisted context first. Cite the
 source context, assign confidence, and proceed only when confidence is high and
 the action does not cross a protected boundary.
 
-Ask Danial only when:
+Ask the configured product reviewer only when:
 
 - context is missing or contradictory;
 - confidence is low;
@@ -263,7 +263,7 @@ Do not use compute for:
 - expanding scope without gates;
 - mutating the scoreboard;
 - generating more cases before the selection signal is trustworthy;
-- dumping huge traces on Danial.
+- dumping huge traces on the configured product reviewer.
 
 Every optimization artifact must attach to refs:
 

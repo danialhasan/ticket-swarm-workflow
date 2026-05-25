@@ -26,10 +26,10 @@ It should compose with `worktree-lane-orchestrator`, not replace it.
 
 Start by reading:
 
-- `/Users/danialhasan/dev/squad/plugins/ticket-swarm-workflow/skills/worktree-lane-orchestrator/SKILL.md`
-- `/Users/danialhasan/dev/squad/plugins/ticket-swarm-workflow/skills/ticket-to-human-review/SKILL.md`
-- `/Users/danialhasan/dev/squad/plugins/ticket-swarm-workflow/skills/review-batch-orchestrator/SKILL.md`
-- `/Users/danialhasan/dev/squad/plugins/ticket-swarm-workflow/skills/references/git-merge-close-gate.md`
+- `../worktree-lane-orchestrator/SKILL.md`
+- `../ticket-to-human-review/SKILL.md`
+- `../review-batch-orchestrator/SKILL.md`
+- `../references/git-merge-close-gate.md`
 
 ## Goal
 
@@ -70,10 +70,10 @@ For each wave:
 
 Typical serialized resources:
 
-- Electron MCP verification
+- `ui_automation_driver` verification
 - one shared staging deploy surface
 - one integration branch that cannot absorb multiple competing mutations safely
-- one shared DB reset / local Supabase state surface when persisted-path proof would otherwise collide
+- one shared DB reset / `db_runtime` state surface when persisted-path proof would otherwise collide
 
 ### 3. Emit lane ownership
 

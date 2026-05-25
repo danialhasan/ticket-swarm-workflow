@@ -140,7 +140,7 @@ def build_parser() -> argparse.ArgumentParser:
 
     common = argparse.ArgumentParser(add_help=False)
     common.add_argument("--repo-root", default=".", help="Path to the repo root. Defaults to cwd.")
-    common.add_argument("--ticket", required=True, help="Ticket id, for example SQD-884")
+    common.add_argument("--ticket", required=True, help="Ticket id, for example PROJ-123")
     common.add_argument("--base-ref", default="main", help="Base ref for the integration branch")
     common.add_argument(
         "--lane",

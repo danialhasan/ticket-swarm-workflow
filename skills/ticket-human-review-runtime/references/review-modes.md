@@ -16,7 +16,7 @@ Recommended runtime boot:
 
 - `pnpm install`
 - `pnpm dev` for full-stack tickets
-- `pnpm dev:desktop` for desktop-only tickets
+- `<RUNTIME_COMMAND_DESKTOP>` for desktop-only tickets
 - `pnpm dev:api` for API-only tickets
 
 ## Optional: Bundle Mode

@@ -49,7 +49,7 @@ leave behind.
 ## Required Inputs
 
 - User outcome or ticket objective.
-- Current state: repo, branch, Linear/topology if relevant, annotations,
+- Current state: repo, branch, `issue_tracker`/topology if relevant, annotations,
   blockers, receipts, and verification status.
 - Product proof standard: what counts as done, what claims are forbidden, and
   what evidence must exist.
@@ -84,7 +84,7 @@ Choose one primary skill:
 | Machine proof is complete and the next gate is human product/runtime review | `$ticket-human-review-runtime` |
 | A day plan must be built from board pressure and calendar reality | `$ticket-day-operator` |
 | Calendar windows need scheduling into real execution blocks | `$calendar-dag-scheduler` |
-| Execution windows need concrete Linear allocation | `$linear-day-allocator` |
+| Execution windows need concrete `issue_tracker` allocation | `$linear-day-allocator` |
 | A blocker cleared or slipped and the day plan must be reflowed | `$day-state-updater` |
 | Feature ideas need beta thesis, non-goal, parking-lot, or kill-list hygiene | `$feature-decision-ledger` |
 | Squad agent behavior, prompt/tool manifests, eval traces, trajectories, datasets, or harness failures need dataset-backed repair | `$squad-harness-engineering` |
@@ -119,7 +119,7 @@ Next action:
 
 ## Stop Condition
 
-Stop routing and ask Danial only when:
+Stop routing and ask the configured product reviewer only when:
 
 - the next move changes product scope;
 - a visible user-facing surface would be deferred;

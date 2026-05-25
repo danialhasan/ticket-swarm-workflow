@@ -1,6 +1,6 @@
 ---
 name: sequential-ticket-review-queue
-description: Use when a bounded ticket set is already implemented and verified enough to enter one-by-one human signoff. Selects the review order, opens each surviving worktree in sequence, runs the human QA loop, captures verdict, merges verified work into main, reruns mainline proof, updates Linear, and only then advances to the next ticket.
+description: Use when a bounded ticket set is already implemented and verified enough to enter one-by-one human signoff. Selects the review order, opens each surviving worktree in sequence, runs the human QA loop, captures verdict, merges verified work into main, reruns mainline proof, updates `issue_tracker`, and only then advances to the next ticket.
 ---
 
 # Sequential Ticket Review Queue
@@ -42,7 +42,7 @@ Turn a review-ready set into one explicit conveyor belt:
 - review one ticket from its surviving worktree
 - capture verdict
 - route fixes if needed
-- move Linear only after human signoff, merge to `main`, and green root-main proof
+- move `issue_tracker` only after human signoff, merge to `main`, and green root-main proof
 - never advance to the next ticket while the current one is unresolved
 
 ## Ownership Split
@@ -50,7 +50,7 @@ Turn a review-ready set into one explicit conveyor belt:
 Default operator split:
 
 - the system owns queue state, worktree selection, runtime boot, artifact lookup, checklist prep,
-  Linear movement, and next-ticket advancement
+  `issue_tracker` movement, and next-ticket advancement
 - the human owns only product-truth judgment for the active ticket
 - the human should answer only `VERIFIED`, `PARTIAL`, or `UNVERIFIED` unless a deeper note is
   actually needed
@@ -83,7 +83,7 @@ workflow burden.
 - closeout packet path for each ticket
 - verification receipt path for each ticket
 - runtime launch command for each ticket
-- current Linear state for each ticket
+- current `issue_tracker` state for each ticket
 - desired terminal state after merge gate, default `Done`
 
 ## Review Order Rules
@@ -95,13 +95,13 @@ Default order:
 3. review verification-fixture or acceptance-harness tickets last inside a bounded slice
 4. if two tickets are independent, prefer the one that unlocks more downstream tickets first
 
-For Bundle A, the default review order is:
+For a public example bundle, the default review order is:
 
-1. `SQD-884` `FI-H01` live API and shared contract spine unification
-2. `SQD-893` `FI-A01` admission normalization scaffold
-3. `SQD-894` `FI-E01` event append scaffold and ordering rules
-4. `SQD-898` `FI-T01` telemetry emission scaffold and correlation conventions
-5. `SQD-899` `FI-V01` shared flow verification fixtures and acceptance scaffolds
+1. `ISSUE-101` `FLOW-H01` live API and shared contract spine unification
+2. `ISSUE-102` `FLOW-A01` admission normalization scaffold
+3. `ISSUE-103` `FLOW-E01` event append scaffold and ordering rules
+4. `ISSUE-104` `FLOW-T01` telemetry emission scaffold and correlation conventions
+5. `ISSUE-105` `FLOW-V01` shared flow verification fixtures and acceptance scaffolds
 
 Only change that order if current dependency truth or runtime reality proves a different order is safer.
 
@@ -165,7 +165,7 @@ If verdict is `VERIFIED`:
 - update the ticket's final human-review artifact
 - merge the surviving ticket branch into local `main`
 - rerun the required proof from root `main`
-- only after root `main` is green, move the Linear issue into its terminal done state
+- only after root `main` is green, move the `issue_tracker` issue into its terminal done state
 - record deploy separately later if and when release actually happens
 - then advance to the next ticket
 
@@ -177,9 +177,9 @@ If verdict is `PARTIAL` or `UNVERIFIED`:
 - rerun human review on the same ticket
 - do not advance to the next ticket until the current ticket is fully resolved or explicitly deferred
 
-### 4. Linear movement rule
+### 4. `issue_tracker` movement rule
 
-Linear state changes are part of the signoff and merge gate, not an afterthought.
+`issue_tracker` state changes are part of the signoff and merge gate, not an afterthought.
 
 Default rule:
 
@@ -204,7 +204,7 @@ Do not treat human signoff alone as closure. Each ticket still owes a merge-to-m
 
 ### 5. Advance the queue
 
-Only after the current ticket is signed off, merged to `main`, root-main proof is green, and Linear is moved correctly:
+Only after the current ticket is signed off, merged to `main`, root-main proof is green, and `issue_tracker` is moved correctly:
 
 - shut down or release its runtime if needed
 - mark the queue pointer forward
@@ -214,21 +214,22 @@ If the external tool write is temporarily blocked by auth or connector health:
 
 - record the verified verdict locally
 - keep the queue truth explicit
-- retry the Linear move as operator work
+- retry the `issue_tracker` move as operator work
 - do not force the human to babysit connector recovery
 
 If the local review set is exhausted:
 
-- return to the global execution queue in `/Users/danialhasan/dev/squad/docs/execution-system/linear-board-execution-order.md`
-- use live Linear dependency truth to choose the next ready ticket in that order
+- return to the configured global execution queue, such as
+  `<WORKSPACE_RECEIPT_ROOT>/execution-order.md`
+- use live `issue_tracker` dependency truth to choose the next ready ticket in that order
 - do not jump ahead to overlays or support artifacts just because they look locally free
 - carry the same one-ticket-at-a-time signoff loop into that next ticket
 
-For the current early slice, the global rule is:
+For an early-slice queue, the global rule is:
 
-- finish and sign off `Bundle A`
-- then continue to the next ready ticket in the canonical Linear queue
-- do not jump `Bundle B` with overlay or support work unless the queue source itself changes
+- finish and sign off the active `<BUNDLE-A>` or equivalent foundation queue
+- then continue to the next ready ticket in the configured `issue_tracker` queue
+- do not jump later bundles with overlay or support work unless the queue source itself changes
 
 ## Close Rule
 
@@ -248,6 +249,6 @@ This skill is complete only when:
 - one explicit review queue
 - one signoff record per ticket
 - one merge-to-main and root-main proof note per verified ticket
-- one Linear transition per verified ticket
+- one `issue_tracker` transition per verified ticket
 - one stop point when a ticket fails review
-- one explicit next-ticket handoff when the queue rolls back into the global Linear order
+- one explicit next-ticket handoff when the queue rolls back into the global `issue_tracker` order

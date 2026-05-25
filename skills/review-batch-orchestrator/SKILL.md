@@ -14,7 +14,7 @@ Use this skill when the question is:
 This skill is the review-wave planner for a multi-ticket day.
 
 If the correct review posture is not a grouped wave but a strict one-by-one signoff conveyor belt,
-route to `/Users/danialhasan/dev/squad/plugins/ticket-swarm-workflow/skills/sequential-ticket-review-queue/SKILL.md`
+route to `../sequential-ticket-review-queue/SKILL.md`
 instead.
 
 ## Inputs to gather first
@@ -28,10 +28,10 @@ instead.
 
 Start by reading:
 
-- `/Users/danialhasan/dev/squad/plugins/ticket-swarm-workflow/skills/ticket-human-review-runtime/SKILL.md`
-- `/Users/danialhasan/dev/squad/plugins/ticket-swarm-workflow/skills/ticket-to-human-review/SKILL.md`
-- `/Users/danialhasan/dev/squad/plugins/ticket-swarm-workflow/skills/parallel-lane-orchestrator/SKILL.md`
-- `/Users/danialhasan/dev/squad/plugins/ticket-swarm-workflow/skills/references/git-merge-close-gate.md`
+- `../ticket-human-review-runtime/SKILL.md`
+- `../ticket-to-human-review/SKILL.md`
+- `../parallel-lane-orchestrator/SKILL.md`
+- `../references/git-merge-close-gate.md`
 
 ## Goal
 
@@ -82,7 +82,7 @@ Use sequential signoff queue when:
 
 - the human wants to finish one ticket fully before touching the next
 - each ticket has its own surviving worktree and should be validated there
-- merge-to-main and Linear `Done` should happen ticket by ticket instead of after one shared wave
+- merge-to-main and the `issue_tracker` terminal `Done` state should happen ticket by ticket instead of after one shared wave
 - the main risk is operator focus and honest closure, not cross-ticket coherence
 
 ### 3. Plan the patch loop

@@ -58,6 +58,6 @@ The requirements pass is not complete until the map can answer:
 - Which claims are currently true in the codebase?
 - Which claims are unproven or missing?
 - What proof would satisfy each claim?
-- What decision still genuinely requires Danial?
+- What decision still genuinely requires the configured product reviewer?
 
 If those answers are not visible, do not route to implementation yet.

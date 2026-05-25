@@ -24,7 +24,7 @@ and proof standard while agents work autonomously.
 ## Use This Skill When
 
 - A mission is running and the worker needs to operate on a task.
-- `mission.get_operating_context` exposes an active task or runnable task.
+- `<mission_operating_context_tool>` exposes an active task or runnable task.
 - The task needs engineering work, verification, review, or receipts.
 - Backend, frontend, desktop, or devops claims must be proven on the right rail.
 
@@ -38,7 +38,7 @@ and proof standard while agents work autonomously.
 
 ## Required Inputs
 
-- `mission.get_operating_context` packet.
+- `<mission_operating_context_tool>` packet.
 - Active task ref, task execution run ref, dependencies, blockers, and proof
   obligations.
 - Execution grant and exposed tool ids.
@@ -51,7 +51,7 @@ and proof standard while agents work autonomously.
 
 ## Operating Loop
 
-1. Read `mission.get_operating_context`.
+1. Read `<mission_operating_context_tool>`.
 2. Confirm the active task and execution grant.
 3. Choose the smallest Ticket Swarm composition:
    - `multi-agent-workflow` when independent lanes can run.

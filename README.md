@@ -103,8 +103,13 @@ Active skills must stay at `skills/<skill-name>/SKILL.md` unless plugin loading
 is changed and cache parity is proven. The grouped folders are an overlay so the
 source is easier to understand without breaking runtime discovery.
 
-There are currently 24 active runtime skills. Some top-level directories under
+There are currently 25 active runtime skills. Some top-level directories under
 `skills/` are support/stub directories, not loadable skills.
+
+Shared public adapter vocabulary lives in
+[`docs/taxonomy.md`](docs/taxonomy.md). Use that glossary when a skill mentions
+`issue_tracker`, `calendar_provider`, `team_chat`, `db_runtime`,
+`eval_mirror`, or release/delivery adapter terms.
 
 ## Section Guide
 
@@ -153,7 +158,7 @@ quietly acting like it proves all of them.
 Example:
 
 ```text
-"Let users connect Slack from inside Squad."
+"Let users connect a `team_chat` provider from inside Squad."
 ```
 
 That is not one requirement. It splits into different proof surfaces:
@@ -162,7 +167,7 @@ That is not one requirement. It splits into different proof surfaces:
 - user can start connection from the app
 - auth returns through the expected app flow
 - connected state is durable and visible afterward
-- the agent can use Slack only inside approved scope
+- the agent can use a `team_chat` provider only inside approved scope
 
 A backend receipt cannot prove the user-facing app journey. A screenshot cannot
 prove durable state. A human note cannot replace missing machine proof.
@@ -213,7 +218,7 @@ as the shared output contract.
 
 Path: [`skill-groups/15-mission-lifecycle/`](skill-groups/15-mission-lifecycle/)
 
-This section drives Squad's own mission product lifecycle. It is the bridge from
+This section drives a Squad-style mission product lifecycle. It is the bridge from
 requirements/product truth into the mission tools, worker loop, Mission
 Overview, and post-mission review.
 
@@ -399,7 +404,7 @@ agentic engineering workflow:
 
 ## Why Teams Should Not Have To Handroll This
 
-This repo-local plugin is useful as a teaching artifact and a way to dogfood the
+This repo-local plugin is useful as a teaching artifact and a way to demonstrate the
 workflow. But handrolling and maintaining this kind of workflow is exactly the
 kind of operational burden most engineering teams should not have to carry.
 

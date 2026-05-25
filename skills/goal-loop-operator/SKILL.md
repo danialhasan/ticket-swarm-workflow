@@ -1,6 +1,6 @@
 ---
 name: goal-loop-operator
-description: Use when Danial gives a /goal-style long-running product outcome that should loop through discovery, implementation-contract materialization, dogfood QA, telemetry review, and blocker re-planning.
+description: Use when a product owner gives a /goal-style long-running product outcome that should loop through discovery, implementation-contract materialization, readiness QA, telemetry review, and blocker re-planning.
 ---
 
 # Goal Loop Operator
@@ -13,9 +13,9 @@ already-scoped ticket.
 
 Examples:
 
-- "Use /goal to make May 13 dogfood actually ready."
+- "Use /goal to make first mission loop actually ready."
 - "Loop until first mission creation and execution works."
-- "Find missing seams, create implementation contracts, dogfood, review
+- "Find missing seams, create implementation contracts, readiness review
   telemetry, and repeat."
 - "Run this while I go on a walk."
 
@@ -35,7 +35,7 @@ goal
   -> current truth snapshot
   -> missing seam discovery
   -> implementation contract / deferral / blocker
-  -> dogfood product flow
+  -> product readiness flow
   -> telemetry and proof review
   -> blocker ledger update
   -> next loop
@@ -54,7 +54,7 @@ them after the fact.
 Use `/goal` / this skill as the primary mechanism when the work needs judgment:
 
 - selecting the next seam
-- creating or reopening Linear implementation contracts
+- creating or reopening `issue_tracker` implementation contracts
 - distinguishing fixture proof from product proof
 - using Browser/Computer/runtime/DB evidence
 - spawning subagents for independent review
@@ -68,9 +68,9 @@ already defined. Automation wakes the thread; it does not own the goal.
 
 - goal statement and target date, if any
 - current repo path and branch
-- active Linear parent/project, when applicable
+- active `issue_tracker` parent/project, when applicable
 - known blockers and prior receipts
-- allowed writeback surfaces: filesystem, Linear, Slack, GitHub
+- allowed writeback surfaces: filesystem, `issue_tracker`, `team_chat`, GitHub
 - proof standard and forbidden claims
 - loop count, time budget, or stop condition
 - high-fidelity requirements map when the goal is still discovering or
@@ -92,7 +92,7 @@ The ledger must include:
 - goal statement
 - target user-visible outcome
 - forbidden claims
-- active Linear topology
+- active `issue_tracker` topology
 - current known blockers
 - loop counter
 - receipt directory
@@ -112,7 +112,7 @@ surfaces, current implementation status, and human judgment packets before the
 loop routes work into implementation contracts.
 
 If the goal references live product annotations, browser comments, design review
-notes, or Danial feedback, create or update an annotation reconciliation ledger
+notes, or reviewer feedback, create or update an annotation reconciliation ledger
 before implementation. Each annotation must have an id, route/surface, expected
 product behavior, observed issue, owner rail, required proof, current status,
 final disposition, and evidence link.
@@ -122,14 +122,14 @@ final disposition, and evidence link.
 ### 1. Rehydrate Truth
 
 Read the goal ledger, current git status, relevant receipts, current code
-surfaces, and live Linear state where available.
+surfaces, and live `issue_tracker` state where available.
 
 Classify each known blocker as:
 
 - `work`: can be fixed by implementation or proof in this repo
 - `contract`: needs a new or reopened implementation contract
 - `rerun`: a QA gate can rerun after dependency proof
-- `deferral`: explicitly out of dogfood scope with honest visible copy
+- `deferral`: explicitly out of readiness scope with honest visible copy
 - `human`: needs credentials, billing, consent, or release intent
 - `unknown`: needs a discovery probe this pass
 
@@ -155,19 +155,19 @@ Look for:
 - missing telemetry
 - missing durable readback
 - missing DB/RLS proof class
-- stale Linear status
+- stale `issue_tracker` status
 - QA tickets marked Done while semantic receipt says PARTIAL/BLOCKED
 - contracts that own readiness but not user repair
 
 Also look for annotation downgrades:
 
 - a visible product route classified as outside the golden path without proof
-  the dogfood user cannot encounter it
+  the readiness user cannot encounter it
 - a human "should not exist" annotation treated as copy cleanup instead of
-  removal, redirect, inaccessibility proof, or explicit Danial-approved deferral
+  removal, redirect, inaccessibility proof, or explicit reviewer-approved deferral
 - a visible seam closed as contract-owned while the user can still hit the
   unresolved surface
-- a scope label that moves a Danial annotation out of the goal without a cited
+- a scope label that moves an annotation out of the goal without a cited
   product decision
 
 ### 3. Choose The Next Workflow
@@ -199,7 +199,7 @@ known visible annotations remain unreconciled.
 
 For the selected move:
 
-- update Linear only after live readback
+- update `issue_tracker` only after live readback
 - keep file ownership clear
 - write receipts before claiming progress
 - run proof appropriate to the surface
@@ -208,7 +208,7 @@ For the selected move:
 
 ### 5. Review Telemetry And Proof
 
-For dogfood/product-flow loops, capture:
+For readiness/product-flow loops, capture:
 
 - Browser route/DOM/console proof
 - Computer proof where native behavior is involved
@@ -259,7 +259,7 @@ The receipt must include:
 - pass number and timestamp
 - current branch/worktree
 - primary move selected and why
-- Linear state read
+- `issue_tracker` state read
 - Browser/Computer/runtime/DB proof
 - subagent review summaries
 - blocker classification changes
@@ -273,7 +273,7 @@ For annotation-driven goals, each receipt must also include:
 - annotation rows touched this pass
 - rows retired with evidence
 - rows still visible and unreconciled
-- any Danial approval required before deferral
+- any reviewer approval required before deferral
 - proof that no row was closed as only `owned by contract`, `outside golden path`,
   `broader scope`, `partial`, `unknown`, or `risk`
 
@@ -282,10 +282,10 @@ For annotation-driven goals, each receipt must also include:
 Do not claim the goal is done unless the ledger has no unclassified blockers
 and the product-visible outcome has proof.
 
-Do not claim `goal-proven`, `dogfood-ready`, or equivalent readiness while any
+Do not claim `goal-proven`, `readiness-ready`, or equivalent readiness while any
 annotation row remains visible and unresolved, merely contract-owned, silently
 scoped out, or classified as `outside golden path` without route proof and
-Danial-approved deferral.
+reviewer-approved deferral.
 
 Do not let an automation, subagent, or status counter override the goal ledger.
 The ledger is the source of truth for the loop.

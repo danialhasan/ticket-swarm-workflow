@@ -1,6 +1,6 @@
 ---
 name: feature-decision-ledger
-description: Use when feature ideas are scattered across Slack, meetings, and Linear and we need one durable ledger for beta thesis, explicit non-goals, parking-lot features, kill-list candidates, and undecided gaps.
+description: Use when feature ideas are scattered across team chat, meetings, and an issue tracker and we need one durable ledger for beta thesis, explicit non-goals, parking-lot features, kill-list candidates, and undecided gaps.
 ---
 
 # Feature Decision Ledger
@@ -8,16 +8,17 @@ description: Use when feature ideas are scattered across Slack, meetings, and Li
 Use this skill when the problem is not "build the next ticket" but "remember what we already
 discussed and stop beta scope from drifting."
 
-This skill maintains one durable compiled surface:
+This skill maintains one durable compiled surface. Ask the reader's agent to fill
+the ledger path from the host workspace:
 
-- `/Users/danialhasan/dev/squad/docs/operations/feature-decision-ledger.md`
+- `<WORKSPACE_RECEIPT_ROOT>/feature-decision-ledger.md`
 
-It does not replace canon or Linear.
+It does not replace the source-of-truth docs or the configured `issue_tracker`.
 It compiles them into one operator-facing decision ledger.
 
 ## Use when
 
-- feature ideas are spread across Slack, meetings, and Linear
+- feature ideas are spread across `team_chat`, meetings, and the `issue_tracker`
 - someone is building a kill list or beta non-goal list
 - the team keeps revisiting old ideas without knowing what was already parked
 - roadmap discussion is outrunning product-memory hygiene
@@ -33,8 +34,8 @@ Do not use when:
 
 - current beta thesis
 - canon cuts and explicit non-goals
-- live Linear project and holding-epic data
-- Slack threads, meeting notes, docs, or transcripts that mention feature ideas
+- live `issue_tracker` project and holding-epic data
+- `team_chat` threads, meeting notes, docs, or transcripts that mention feature ideas
 - current ledger file, if it exists
 - known human decisions that overruled older ideas
 - high-fidelity requirements map when the source material is still shaping a
@@ -43,8 +44,8 @@ Do not use when:
 
 Start by reading:
 
-- `/Users/danialhasan/dev/squad/docs/operations/feature-decision-ledger.md`
-- `/Users/danialhasan/dev/squad/canon/22-initial-slice-v1-scope.md`
+- `<WORKSPACE_RECEIPT_ROOT>/feature-decision-ledger.md`
+- `<release_policy_ref>` or the host product's current scope source
 - `../references/high-fidelity-requirements-map.md`
 - `references/ledger-categories.md`
 - `references/source-priority.md`
@@ -52,8 +53,8 @@ Start by reading:
 
 When the source set is live:
 
-- use Composio Slack for Slack messages, threads, and canvases
-- use Composio Linear for project issues, comments, and holding epics
+- use the configured `team_chat` adapter for messages, threads, and canvases
+- use the configured `issue_tracker` adapter for project issues, comments, and holding epics
 - use calendar or meeting notes only when they actually contain feature ideas or scope decisions
 
 ## Goal
@@ -93,9 +94,9 @@ then summarize the decision status instead of replacing that context.
 
 Collect candidate ideas from:
 
-- Slack
+- `team_chat`
 - meeting notes or transcripts
-- Linear issues, comments, and holding epics
+- `issue_tracker` issues, comments, and holding epics
 - existing ledger rows
 
 Do not treat every mention as a feature.
@@ -135,7 +136,7 @@ idea into scope.
 
 ### 5. Write the durable ledger
 
-Update `/Users/danialhasan/dev/squad/docs/operations/feature-decision-ledger.md`.
+Update `<WORKSPACE_RECEIPT_ROOT>/feature-decision-ledger.md`.
 
 Rules:
 
@@ -163,7 +164,7 @@ Automation-friendly rules:
 - read the current ledger first
 - only rewrite rows whose source truth actually changed
 - prefer additive deltas over large rewrites
-- escalate conflicts between Slack, Linear, and canon instead of guessing
+- escalate conflicts between `team_chat`, `issue_tracker`, and source-of-truth docs instead of guessing
 - if there is no real change, emit a concise delta note instead of churn
 
 ## Close rule
