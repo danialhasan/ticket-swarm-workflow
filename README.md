@@ -16,7 +16,7 @@ This plugin is that discipline encoded as workflow.
 
 The structure comes from the requirements-engineering memo:
 
-[`docs/operations/sessions/2026-05-13/reports/mastering-requirements-agentic-engineering-and-squad.md`](/Users/danialhasan/dev/squad/docs/operations/sessions/2026-05-13/reports/mastering-requirements-agentic-engineering-and-squad.md)
+[`docs/mastering-requirements-agentic-engineering-and-squad.md`](docs/mastering-requirements-agentic-engineering-and-squad.md)
 
 The core idea from that memo is simple:
 
