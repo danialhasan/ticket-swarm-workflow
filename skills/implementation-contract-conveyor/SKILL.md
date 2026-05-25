@@ -5,6 +5,10 @@ description: Use when approved Squad Design Contract clusters or implementation-
 
 # Implementation Contract Conveyor
 
+For ambiguous Ticket Swarm requests, use `$ticket-swarm-router` first. Activate
+this skill only when the selected next move is to materialize an
+implementation-ready seam into a contract.
+
 Use this skill after `$design-contract-conveyor` and before
 `$ticket-to-human-review` contract signoff.
 
@@ -12,6 +16,9 @@ This skill turns approved design truth into implementation contracts. It does
 not develop, test, deploy, or release the work. Its job is to compile the
 contract that lets the plugin run development/testing through direct skill
 composition without improvising.
+
+For the compact skill contract shared across this plugin, see
+[../references/outcome-first-skill-contract.md](../references/outcome-first-skill-contract.md).
 
 ## Goal
 
@@ -73,28 +80,34 @@ Do not use this skill when:
 - DB/RLS proof requirement, if persisted truth or access boundaries are touched
 - human runtime review need, if the ticket changes visible product behavior
 - delivery eligibility gate when the work is expected to reach beta users
+- high-fidelity requirements map when the contract originates from discovery,
+  elicitation, mission setup, orchestration, generative UI, governance, or
+  model/eval behavior instead of an already-approved narrow design cluster
 
 Use `/Users/danialhasan/dev/squad/docs/operations/sessions/2026-05-03/implementation-contract-template-v2.md`
 as the repo-local template unless a newer template is explicitly accepted.
 
-## Skill Dependencies
+## Related Skills
 
-Use these skills and plugins in this order:
+Load these only when the current implementation-contract pass needs them:
 
-1. `linear:linear` for live issue, status, dependency, checklist, and comment
+- `linear:linear` for live issue, status, dependency, checklist, and comment
    readback before creating or updating implementation children.
-2. `$design-contract-conveyor` only as the source of approved design truth; do
+- `$design-contract-conveyor` only as the source of approved design truth; do
    not reopen design while compiling the contract unless approval is missing.
-3. `$multi-agent-workflow` for bounded discovery lanes when canon, code,
+- `$multi-agent-workflow` for bounded discovery lanes when canon, code,
    Linear, or review evidence need independent confirmation.
-4. `$worktree-lane-orchestrator` only after the contract is accepted and a
+- `../references/high-fidelity-requirements-map.md` when the contract is being
+   generated from requirements engineering or elicitation rather than a
+   previously accepted design cluster.
+- `$worktree-lane-orchestrator` only after the contract is accepted and a
    ticket is ready to execute.
-5. `$ticket-to-human-review` to human-review and sign off the compiled
+- `$ticket-to-human-review` to human-review and sign off the compiled
    implementation contract.
-6. `$multi-agent-workflow`, `$layered-verification`,
+- `$multi-agent-workflow`, `$layered-verification`,
    `$worktree-lane-orchestrator`, `$review-batch-orchestrator`, and related
    skills as the direct dev/testing composition after signoff.
-7. `$beta-release-assist` only for separate post-development release handoff
+- `$beta-release-assist` only for separate post-development release handoff
    when the human explicitly enters release work.
 
 ## Phase 1: Live Topology And Approval Gate
@@ -177,6 +190,12 @@ Common split rules for the first mission loop:
 
 Extract the system truth the implementer must obey.
 
+If a high-fidelity requirements map exists, cite it here and preserve its
+claim/proof split. Do not compress distinct data exposure, UI state,
+runtime/tool, persistence, governance, eval, and human-judgment claims into one
+implementation task unless the map explicitly binds them to the same proof
+surface.
+
 Record:
 
 - canon references and obligations
@@ -227,6 +246,7 @@ Capture:
 - patch and re-review loop until zero blocking findings
 - `$layered-verification` loop until green or true blocker
 - UI/Electron verifier lane when required
+- Computer Use focus preflight for UI/Electron proof: exact Electron app path, raised/focused window, and real renderer HTML content in the accessibility tree before clicks or visual judgment
 - persisted/DB-backed proof row when required
 - receipt destinations
 

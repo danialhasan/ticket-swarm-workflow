@@ -5,6 +5,10 @@ description: Use when a bounded ticket set is already implemented and verified e
 
 # Sequential Ticket Review Queue
 
+For ambiguous Ticket Swarm requests, use `$ticket-swarm-router` first. Activate
+this skill only when the selected next move is one-at-a-time human review and
+closeout of already implemented, already verified ticket work.
+
 Use this skill when the correct human-review posture is:
 
 - one ticket at a time
@@ -21,13 +25,14 @@ Do not use this skill when:
 - multiple tickets still need to converge into one grouped human-review wave
 - automated review or layered verification is still open on the current ticket
 
-Read these first:
+Read these only when needed:
 
-- `/Users/danialhasan/dev/squad/plugins/ticket-swarm-workflow/skills/ticket-human-review-runtime/SKILL.md`
-- `/Users/danialhasan/dev/squad/plugins/ticket-swarm-workflow/skills/ticket-to-human-review/SKILL.md`
-- `/Users/danialhasan/dev/squad/plugins/ticket-swarm-workflow/skills/review-batch-orchestrator/SKILL.md` only if you need to confirm that sequential review is preferable to grouped review
-- `/Users/danialhasan/dev/squad/plugins/ticket-swarm-workflow/skills/ticket-human-review-runtime/references/review-surface-classification.md`
-- `/Users/danialhasan/dev/squad/plugins/ticket-swarm-workflow/skills/references/git-merge-close-gate.md`
+- `../ticket-human-review-runtime/SKILL.md` when preparing the concrete runtime review surface
+- `../ticket-to-human-review/SKILL.md` when contract signoff state is unclear
+- `../review-batch-orchestrator/SKILL.md` only when deciding between sequential and grouped review
+- `../ticket-human-review-runtime/references/review-surface-classification.md` when the human review mode is unclear
+- `../references/git-merge-close-gate.md` when the exact post-signoff close rule matters
+- `../references/outcome-first-skill-contract.md` for the compact plugin skill contract
 
 ## Goal
 

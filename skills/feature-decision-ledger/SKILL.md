@@ -37,11 +37,15 @@ Do not use when:
 - Slack threads, meeting notes, docs, or transcripts that mention feature ideas
 - current ledger file, if it exists
 - known human decisions that overruled older ideas
+- high-fidelity requirements map when the source material is still shaping a
+  product flow, mission, elicitation surface, applied-AI behavior, or
+  governance boundary instead of only classifying already-decided features
 
 Start by reading:
 
 - `/Users/danialhasan/dev/squad/docs/operations/feature-decision-ledger.md`
 - `/Users/danialhasan/dev/squad/canon/22-initial-slice-v1-scope.md`
+- `../references/high-fidelity-requirements-map.md`
 - `references/ledger-categories.md`
 - `references/source-priority.md`
 - `references/automation-loop.md`
@@ -61,6 +65,9 @@ Maintain one decisioning surface that continuously emits:
 - parking-lot features
 - kill-list candidates
 - "this was discussed but never decided" gaps
+- a high-fidelity requirements map when the decision surface depends on a
+  not-yet-settled user flow, data exposure model, proof surface, or human
+  judgment packet
 
 ## Workflow
 
@@ -75,6 +82,12 @@ The ledger must always begin with:
 - source of truth for that thesis
 
 If the thesis changed, record who changed it and what older thesis was replaced.
+
+If the pass is still requirements engineering rather than ledger hygiene,
+compile or update the high-fidelity requirements map before reducing ideas into
+ledger buckets. The map must preserve adjacent scenarios, data exposure,
+canonical surfaces, proof matrices, and open human decisions; the ledger should
+then summarize the decision status instead of replacing that context.
 
 ### 2. Gather source material
 

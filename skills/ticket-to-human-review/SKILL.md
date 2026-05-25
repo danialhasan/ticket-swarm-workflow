@@ -105,6 +105,7 @@ signoff:
 - patch and re-review loop until zero blocking findings
 - `$layered-verification` loop until green or true blocker
 - UI/Electron verifier lane when required
+- Computer Use focus preflight for UI/Electron proof: exact Electron app path, raised/focused window, and real renderer HTML content in the accessibility tree before clicks or visual judgment
 - persisted/DB-backed proof row when required
 - receipt destinations
 

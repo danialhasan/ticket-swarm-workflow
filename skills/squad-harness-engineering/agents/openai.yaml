@@ -1,0 +1,4 @@
+interface:
+  display_name: "Squad Harness Engineering"
+  short_description: "Turn agent behavior changes into trace-backed eval and regression work"
+  default_prompt: "Use $squad-harness-engineering when a Squad prompt, tool, policy, trace, trajectory, or eval change needs source provenance, dataset cases, scorers or judges, baseline comparison, and regression receipts."

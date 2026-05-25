@@ -5,6 +5,10 @@ description: Use when turning a live browser-backed design review into durable D
 
 # Design Contract Conveyor
 
+For ambiguous Ticket Swarm requests, use `$ticket-swarm-router` first. Activate
+this skill only when the selected next move is to convert live human design
+steering into durable Design Contract truth.
+
 Use this skill when a Squad frontend route or state needs to move from live
 human design steering into execution-ready Linear work.
 
@@ -28,6 +32,9 @@ references + live browser context
 Design Contract tickets capture human taste and product truth. Implementation
 contracts convert that approved truth into development/testing-ready contracts.
 
+For the compact skill contract shared across this plugin, see
+[../references/outcome-first-skill-contract.md](../references/outcome-first-skill-contract.md).
+
 ## Required Inputs
 
 - active route or route-state
@@ -38,22 +45,22 @@ contracts convert that approved truth into development/testing-ready contracts.
 - current live browser state in `@browser-use`
 - implementation contract target, if the route cluster is already approved
 
-## Skill Dependencies
+## Related Skills
 
-Use these skills and plugins in this order:
+Load these only when the current design-contract pass needs them:
 
-1. `$browser-use:browser` for local live UI walkthroughs, DOM snapshots,
+- `$browser-use:browser` for local live UI walkthroughs, DOM snapshots,
    screenshots, route inspection, and visual receipts.
-2. `$design-interview-loop` for human taste iteration against concrete screens.
-3. `$medium-fidelity-ascii-design` for recursive screen structure, cut states,
+- `$design-interview-loop` for human taste iteration against concrete screens.
+- `$medium-fidelity-ascii-design` for recursive screen structure, cut states,
    folded states, and route/state source hierarchy.
-4. `linear:linear` for Design Contract ticket hygiene and implementation-contract
+- `linear:linear` for Design Contract ticket hygiene and implementation-contract
    ticket updates.
-5. `$implementation-contract-conveyor` only after the relevant route cluster is
+- `$implementation-contract-conveyor` only after the relevant route cluster is
    approved.
-6. `$ticket-to-human-review` only after the implementation contract is compiled
+- `$ticket-to-human-review` only after the implementation contract is compiled
    and ready for human signoff.
-7. `$multi-agent-workflow`, `$layered-verification`, and review/optimization
+- `$multi-agent-workflow`, `$layered-verification`, and review/optimization
    skills only after implementation-contract signoff.
 
 For local Squad UI walkthroughs, use `@browser-use` with the Codex in-app

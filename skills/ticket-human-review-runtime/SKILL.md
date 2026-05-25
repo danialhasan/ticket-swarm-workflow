@@ -5,6 +5,10 @@ description: Use when a Squad ticket is already through automated review and ver
 
 # Ticket Human Review Runtime
 
+For ambiguous Ticket Swarm requests, use `$ticket-swarm-router` first. Activate
+this skill only when machine review/proof is complete and the selected next
+move is human product/runtime QA.
+
 Use this skill when a ticket is ready for human product QA and we need a concrete review surface instead of a generic "please inspect this" handoff.
 
 This skill does not replace automated review or machine verification. It starts only after:
@@ -19,6 +23,7 @@ Read these only when needed:
 - `references/review-modes.md` when choosing between ticket review and bundle review
 - `references/review-surface-classification.md` when deciding whether the ticket even deserves human runtime review
 - `../references/git-merge-close-gate.md` when the operator needs the exact post-signoff close rule
+- `../references/outcome-first-skill-contract.md` for the compact plugin skill contract
 
 ## Goal
 
@@ -148,6 +153,8 @@ The checklist should include:
 For UI or Electron tickets:
 
 - use the Electron verifier lane output from layered verification as the base script
+- start the review packet with the Computer Use focus preflight: exact Electron app path, raised/focused window, and real renderer HTML content in the accessibility tree before clicks or visual judgment
+- treat blank native windows, missing HTML content, or stale screenshots as focus/runtime blockers, not as review evidence
 - translate it into a human-readable checklist
 - include one screenshot-backed or ASCII-backed orientation block when the UI is still scaffold-like
 - keep the checklist concrete enough that a person can follow it without reading code

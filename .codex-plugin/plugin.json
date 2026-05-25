@@ -1,7 +1,7 @@
 {
   "name": "ticket-swarm-workflow",
   "version": "0.1.0",
-  "description": "Repo-local workflow plugin for design contracts, implementation-contract signoff, iterative development/testing composition, execution days, and feature-decision hygiene.",
+  "description": "Repo-local workflow plugin for requirements/product-truth discovery, design and implementation contracts, day planning, execution orchestration, review reconciliation, verification, and beta release handoff.",
   "author": {
     "name": "TrySquad"
   },
@@ -15,8 +15,8 @@
   "skills": "./skills/",
   "interface": {
     "displayName": "Ticket Swarm Workflow",
-    "shortDescription": "Compile and run implementation-contract workflows",
-    "longDescription": "Repo-local workflow plugin for moving Squad work from design contracts into signed-off implementation contracts, then into iterative multi-agent development/testing composition with review loops, layered verification, receipts, and separate human-triggered release handoff.",
+    "shortDescription": "Route Squad work from requirements truth to contracts, execution, review, and release",
+    "longDescription": "Repo-local workflow plugin for moving Squad work from requirements/product-truth discovery into design contracts, signed-off implementation contracts, execution orchestration, review reconciliation, layered verification, receipts, and separate human-triggered release handoff.",
     "developerName": "TrySquad",
     "category": "Productivity",
     "capabilities": [
@@ -24,17 +24,16 @@
       "Write"
     ],
     "defaultPrompt": [
-      "Use $design-contract-conveyor for live route/state design review before compiling implementation contracts; implementation contracts only begin after the relevant Design Contract route cluster is approved.",
-      "Use $implementation-contract-conveyor to turn approved Design Contract clusters and implementation-readiness rows into one full-SDLC child contract under the active Implementation Contract parent.",
-      "Use $ticket-to-human-review to human-review and sign off an implementation contract before development/testing starts.",
-      "After contract signoff, run development/testing by directly composing $multi-agent-workflow, $layered-verification, worktree orchestration, review loops, and receipt-producing verification skills.",
-      "Use $ticket-day-operator to turn a board target and today's calendar into an hourly close plan with deploy-truth and shifted-schedule rules.",
-      "Use $calendar-dag-scheduler plus $linear-day-allocator when today's free windows need to become real Calendar blocks and due-today child tickets in Linear.",
-      "Use $parallel-lane-orchestrator plus $review-batch-orchestrator when multiple dependency-ready tickets should execute in parallel and converge into one grouped review wave.",
-      "Use $sequential-ticket-review-queue when you need the lowest-level review loop: one ticket worktree at a time, human validate it, sign off, move Linear to Done, then advance to the next ticket.",
-      "Use $beta-release-assist only for separate post-development release handoff after the human enters release work.",
-      "Use $day-state-updater when a blocker clears or a lane slips and the rest of the day needs to be reflowed honestly.",
-      "Use $feature-decision-ledger to compile feature ideas from Slack, meetings, and Linear into one beta thesis, non-goal, parking-lot, and kill-list surface."
+      "Use the source organization in skill-groups/README.md as the lifecycle map: routing, requirements/product truth, contracts, day planning, execution orchestration, review/QA, release, and references.",
+      "Use $ticket-swarm-router first when a Ticket Swarm request could involve multiple skills. Select one primary next workflow by outcome, current blocker, dependencies, proof need, and stop condition.",
+      "Load only the selected downstream skill after routing. Do not run the whole plugin as a fixed chain.",
+      "Keep every pass outcome-first: user-visible outcome, current truth, forbidden claims, required evidence, selected workflow, receipt path, next action.",
+      "Run requirements/product-truth work before contracts or execution whenever the problem, actor, scenario, fit criterion, proof surface, or decision owner is unclear.",
+      "Use $goal-loop-operator for broad /goal-style product outcomes that must loop until green, blocked, or explicitly deferred.",
+      "Use $annotation-reconciliation-guard when Danial's live annotations must become hard reconciliation rows before readiness can be claimed.",
+      "Use $ui-abstraction-guard when repeated UI abstraction failures should become proactive rules, scans, contracts, or checks instead of more manual annotation.",
+      "Use $squad-harness-engineering when Squad agent behavior, prompt/tool manifests, eval traces, trajectories, datasets, or applied-AI harness failures need source-backed cases, scorers or judges, baseline comparison, and regression receipts.",
+      "Use contract, lane, review, calendar, day, and release skills only when their routing condition is met; do not invoke them as ceremony."
     ],
     "brandColor": "#1D4ED8"
   }

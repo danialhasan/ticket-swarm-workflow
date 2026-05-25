@@ -94,6 +94,9 @@ The verification plan must name:
 - the expected green state after each meaningful interaction
 - the evidence to capture in the receipt
 - the serialized Electron lease note for that verifier run
+- the Computer Use focus preflight: target the exact running Electron app path, raise/focus the window, and poll until the accessibility tree contains the real renderer HTML content before clicking or judging the UI
+
+Blank native windows, missing HTML content, and stale screenshots are focus/runtime blockers. They are not product proof and must not satisfy UI or Electron verification.
 
 Skip only when the ticket has no UI or Electron runtime surface.
 
