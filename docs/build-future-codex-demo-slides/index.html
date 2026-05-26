@@ -1,0 +1,2581 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Build Future x Codex Demo Slides</title>
+    <style>
+      :root {
+        color-scheme: dark;
+        --stage-w: 1920;
+        --stage-h: 1080;
+        --color-mercury-blue: #5266eb;
+        --color-ghost-blue: #cdddff;
+        --color-deep-space: #171721;
+        --color-midnight-slate: #1e1e2a;
+        --color-graphite: #272735;
+        --color-lead: #70707d;
+        --color-starlight: #ededf3;
+        --color-silver: #c3c3cc;
+        --color-pure-white: #ffffff;
+        --line-carbon: rgba(112, 112, 125, 0.7);
+        --line-carbon-strong: rgba(112, 112, 125, 0.78);
+        --surface-abyss: var(--color-deep-space);
+        --surface-surface: var(--color-midnight-slate);
+        --surface-interactive: var(--color-graphite);
+        --safe-x: 128px;
+        --safe-y: 72px;
+        --font-arcadiadisplay: "arcadiaDisplay", Inter, Manrope, ui-sans-serif, system-ui,
+          -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        --font-arcadia: "arcadia", Inter, Manrope, ui-sans-serif, system-ui, -apple-system,
+          BlinkMacSystemFont, "Segoe UI", sans-serif;
+        --font: var(--font-arcadia);
+        --font-display: var(--font-arcadiadisplay);
+        --mono: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+        --min-readable-text: 24px;
+        --radius-cards: 4px;
+        --radius-panels: 4px;
+        --radius-elements: 4px;
+        --radius-buttons: 32px;
+        --radius-pill: 100px;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+        background: var(--surface-abyss);
+        color: var(--color-starlight);
+        font-family: var(--font);
+        font-size: var(--min-readable-text);
+        font-feature-settings: "ss01" on;
+        overflow: hidden;
+      }
+
+      body {
+        display: grid;
+        place-items: center;
+      }
+
+      body.presentation-mode {
+        overflow: hidden;
+      }
+
+      body.workbench-mode {
+        min-height: 100%;
+        height: auto;
+        display: block;
+        padding: 0;
+        overflow-x: hidden;
+        overflow-y: auto;
+        background: var(--surface-abyss);
+      }
+
+      .deck {
+        position: relative;
+        width: calc(var(--stage-w) * 1px);
+        height: calc(var(--stage-h) * 1px);
+        transform-origin: center;
+        background: var(--surface-surface);
+        overflow: hidden;
+      }
+
+      body.workbench-mode .deck {
+        width: 100vw;
+        height: 100dvh;
+        min-height: 100dvh;
+        margin: 0;
+        overflow: hidden;
+        transform: none !important;
+        background: transparent;
+      }
+
+      body.presentation-mode .deck {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+      }
+
+      .slide {
+        position: absolute;
+        inset: 0;
+        display: none;
+        padding: var(--safe-y) var(--safe-x);
+        background: var(--surface-surface);
+      }
+
+      .section-marker {
+        position: absolute;
+        top: 34px;
+        left: 42px;
+        color: rgba(205, 221, 255, 0.5);
+        font-family: var(--font-display);
+        font-size: 34px;
+        font-weight: 300;
+        line-height: 1;
+        letter-spacing: 0.01em;
+      }
+
+      body.workbench-mode .slide {
+        position: relative;
+        inset: auto;
+        min-height: 100dvh;
+        padding: 40px;
+        border: 1px solid var(--line-carbon);
+        border-radius: 0;
+        background: var(--surface-surface);
+      }
+
+      body.workbench-mode .slide.full-bleed {
+        width: 100vw;
+        height: 100dvh;
+        min-height: 100dvh;
+        padding: 0;
+        border: 0;
+      }
+
+      .slide.active {
+        display: grid;
+      }
+
+      .slide.standard {
+        grid-template-rows: auto 1fr auto;
+        gap: 38px;
+      }
+
+      .slide.intro-slide {
+        grid-template-rows: 1fr;
+        align-items: center;
+      }
+
+      .slide.why-slide {
+        grid-template-rows: auto auto;
+        align-content: center;
+        gap: 70px;
+      }
+
+      .slide.chapter-slide {
+        grid-template-rows: auto auto;
+        align-content: center;
+        gap: 64px;
+      }
+
+      .slide.full-bleed {
+        padding: 0;
+      }
+
+      .slide-image {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .intro-layout {
+        display: grid;
+        grid-template-columns: 0.86fr 1.14fr;
+        gap: 86px;
+        align-items: center;
+        width: 100%;
+        min-height: 100%;
+      }
+
+      .intro-copy {
+        display: grid;
+        gap: 34px;
+        align-content: center;
+      }
+
+      .intro-copy h1 {
+        max-width: 760px;
+        font-size: 94px;
+      }
+
+      .intro-copy p {
+        max-width: 780px;
+        color: var(--color-silver);
+        font-size: 46px;
+      }
+
+      .profile-shot {
+        width: 100%;
+        max-height: 760px;
+        object-fit: contain;
+        border: 1px solid var(--line-carbon);
+        background: var(--color-pure-white);
+      }
+
+      .why-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 44px;
+      }
+
+      .why-panel {
+        display: grid;
+        min-height: 310px;
+        align-content: start;
+        gap: 22px;
+        padding-top: 28px;
+        border-top: 1px solid var(--line-carbon-strong);
+      }
+
+      .why-panel b {
+        display: block;
+        color: var(--color-starlight);
+        font-family: var(--font-display);
+        font-size: 42px;
+        font-weight: 480;
+        line-height: 1.12;
+        letter-spacing: 0.01em;
+      }
+
+      .why-panel span {
+        display: block;
+        max-width: 680px;
+        color: var(--color-silver);
+        font-size: 34px;
+        font-weight: 360;
+        line-height: 1.22;
+      }
+
+      .statement-grid,
+      .issue-grid,
+      .demo-grid-compact {
+        display: grid;
+        gap: 32px;
+      }
+
+      .statement-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .issue-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .demo-grid-compact {
+        grid-template-columns: 1.05fr 0.95fr;
+        align-items: start;
+      }
+
+      .codex-worked-grid {
+        grid-template-columns: 1fr;
+        align-items: center;
+        width: calc(50% - 48px);
+        min-height: 100%;
+      }
+
+      .codex-worked-grid .runtime-badge-shot {
+        position: absolute;
+        top: 50%;
+        right: 0;
+        display: block;
+        width: 50%;
+        max-width: none;
+        max-height: 760px;
+        transform: translateY(-50%);
+        object-fit: contain;
+        border-right: 0;
+        border-radius: 4px 0 0 4px;
+      }
+
+      .media-stack-slide .demo-grid-compact {
+        width: calc(40% - var(--safe-x));
+        grid-template-columns: 1fr;
+      }
+
+      .edge-media-stack {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        display: grid;
+        width: 60%;
+        grid-template-rows: repeat(2, minmax(0, 1fr));
+        gap: 0;
+        padding-block: 24px;
+        overflow: hidden;
+      }
+
+      .edge-media-stack img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        background: var(--color-pure-white);
+      }
+
+      body.workbench-mode .media-stack-slide .demo-grid-compact {
+        width: 40%;
+      }
+
+      .factory-trap-grid {
+        display: grid;
+        width: calc(50% - var(--safe-x));
+        grid-template-columns: 1fr;
+        align-items: center;
+      }
+
+      .cause-list {
+        display: grid;
+        gap: 18px;
+        margin: 0;
+        padding-left: 1em;
+        color: var(--color-silver);
+      }
+
+      .cause-list li {
+        max-width: 760px;
+        font-size: 34px;
+        line-height: 1.16;
+      }
+
+      .iceberg-image {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        display: block;
+        width: 50%;
+        height: 100%;
+        object-fit: contain;
+        background: var(--color-pure-white);
+      }
+
+      .iceberg-diagram {
+        display: grid;
+        grid-template-rows: 0.43fr auto 0.57fr;
+        min-height: 780px;
+        padding: 44px 52px;
+        background: var(--color-pure-white);
+        color: #11131a;
+        font-family: var(--font-display);
+      }
+
+      .iceberg-visible,
+      .iceberg-hidden {
+        position: relative;
+        display: grid;
+        align-content: center;
+        justify-items: center;
+        text-align: center;
+      }
+
+      .iceberg-visible::before,
+      .iceberg-hidden::before {
+        content: "";
+        position: absolute;
+        left: 50%;
+        z-index: 0;
+        width: 58%;
+        transform: translateX(-50%);
+        border: 3px solid #11131a;
+        background: rgba(235, 242, 255, 0.86);
+      }
+
+      .iceberg-visible::before {
+        bottom: -1px;
+        height: 82%;
+        clip-path: polygon(50% 0, 100% 100%, 0 100%);
+      }
+
+      .iceberg-hidden::before {
+        top: -1px;
+        height: 94%;
+        clip-path: polygon(0 0, 100% 0, 82% 100%, 17% 100%);
+      }
+
+      .waterline {
+        z-index: 2;
+        height: 5px;
+        border-radius: 999px;
+        background: #126bdf;
+        box-shadow:
+          0 12px 0 rgba(18, 107, 223, 0.22),
+          0 -12px 0 rgba(18, 107, 223, 0.14);
+      }
+
+      .iceberg-label {
+        position: relative;
+        z-index: 2;
+        color: #126bdf;
+        font-size: 40px;
+        font-weight: 620;
+        line-height: 1.1;
+      }
+
+      .iceberg-terms {
+        position: relative;
+        z-index: 2;
+        display: flex;
+        max-width: 640px;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 12px 24px;
+        margin-top: 18px;
+        font-family: var(--font);
+        font-size: 27px;
+        font-weight: 520;
+        line-height: 1.1;
+      }
+
+      .iceberg-hidden .iceberg-terms {
+        max-width: 720px;
+        gap: 14px 26px;
+        font-size: 26px;
+      }
+
+      body.workbench-mode .factory-trap-grid {
+        width: 50%;
+      }
+
+      body.workbench-mode .iceberg-diagram {
+        min-height: 620px;
+      }
+
+      .statement-card,
+      .issue-card,
+      .demo-panel {
+        display: grid;
+        align-content: start;
+        gap: 20px;
+        padding-top: 26px;
+        border-top: 1px solid var(--line-carbon-strong);
+      }
+
+      .statement-card b,
+      .issue-card b,
+      .demo-panel b {
+        color: var(--color-starlight);
+        font-family: var(--font-display);
+        font-size: 38px;
+        font-weight: 480;
+        line-height: 1.12;
+        letter-spacing: 0.01em;
+      }
+
+      .statement-card span,
+      .issue-card span,
+      .demo-panel span {
+        color: var(--color-silver);
+        font-size: 30px;
+        font-weight: 360;
+        line-height: 1.22;
+      }
+
+      .compact-issue-list {
+        display: grid;
+        gap: 14px;
+        margin: 0;
+        padding-left: 1em;
+        color: var(--color-silver);
+      }
+
+      .compact-issue-list li {
+        max-width: 700px;
+        color: var(--color-silver);
+        font-size: 34px;
+        line-height: 1.14;
+      }
+
+      .rail-list {
+        display: grid;
+        gap: 18px;
+        max-width: 1180px;
+      }
+
+      .rail-row {
+        display: grid;
+        grid-template-columns: 220px 1fr;
+        gap: 34px;
+        align-items: baseline;
+        padding: 18px 0;
+        border-top: 1px solid var(--line-carbon);
+      }
+
+      .rail-row b {
+        color: var(--color-starlight);
+        font-size: 30px;
+        font-weight: 480;
+      }
+
+      .rail-row span {
+        color: var(--color-silver);
+        font-size: 30px;
+        line-height: 1.2;
+      }
+
+      .transition-claim {
+        place-items: center;
+        text-align: center;
+      }
+
+      .source-grid {
+        display: grid;
+        grid-template-columns: 1fr 0.72fr;
+        gap: 76px;
+        align-items: center;
+        width: 100%;
+      }
+
+      .source-grid.full-height-source {
+        grid-template-columns: 1fr;
+        gap: 56px;
+        width: calc(50% - 48px);
+      }
+
+      .source-points {
+        display: grid;
+        gap: 18px;
+        margin: 8px 0 0;
+        padding-left: 1em;
+        color: var(--color-silver);
+      }
+
+      .source-points li {
+        max-width: 840px;
+        color: var(--color-silver);
+        font-size: 34px;
+        line-height: 1.15;
+      }
+
+      .source-grid .lede {
+        max-width: 920px;
+        margin-top: 22px;
+        font-size: 34px;
+        line-height: 1.2;
+      }
+
+      .book-cover {
+        display: block;
+        width: 100%;
+        max-height: 820px;
+        object-fit: contain;
+        background: var(--color-pure-white);
+        box-shadow: 0 28px 70px rgba(0, 0, 0, 0.28);
+      }
+
+      .book-cover.full-height-cover {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        width: auto;
+        height: 100%;
+        max-height: none;
+        justify-self: end;
+      }
+
+      .section-map-list {
+        display: grid;
+        gap: 22px;
+        max-width: 1180px;
+      }
+
+      .section-map-row {
+        display: grid;
+        grid-template-columns: 0.48fr 1fr;
+        gap: 42px;
+        align-items: start;
+        padding-top: 22px;
+        border-top: 1px solid var(--line-carbon-strong);
+      }
+
+      .section-map-row b {
+        color: var(--color-starlight);
+        font-family: var(--font-display);
+        font-size: 36px;
+        font-weight: 480;
+        line-height: 1.1;
+      }
+
+      .section-map-row span {
+        color: var(--color-silver);
+        font-size: 30px;
+        line-height: 1.18;
+      }
+
+      .compare-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 62px;
+        align-items: stretch;
+      }
+
+      .compare-card {
+        display: grid;
+        align-content: start;
+        gap: 22px;
+        min-height: 520px;
+        padding-top: 30px;
+        border-top: 1px solid var(--line-carbon-strong);
+      }
+
+      .compare-card b {
+        color: var(--color-starlight);
+        font-family: var(--font-display);
+        font-size: 42px;
+        font-weight: 480;
+        line-height: 1.1;
+      }
+
+      .compare-card ul {
+        display: grid;
+        gap: 18px;
+        margin: 0;
+        padding-left: 1em;
+      }
+
+      .compare-card li {
+        color: var(--color-silver);
+        font-size: 31px;
+        line-height: 1.16;
+      }
+
+      .compare-card.after {
+        border-top-color: var(--color-mist);
+      }
+
+      .requirements-breakdown {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 32px;
+      }
+
+      .requirements-item {
+        display: grid;
+        align-content: start;
+        gap: 14px;
+        min-height: 178px;
+        padding-top: 22px;
+        border-top: 1px solid var(--line-carbon-strong);
+      }
+
+      .requirements-item b {
+        color: var(--color-starlight);
+        font-family: var(--font-display);
+        font-size: 34px;
+        font-weight: 480;
+        line-height: 1.08;
+      }
+
+      .requirements-item span {
+        color: var(--color-silver);
+        font-size: 27px;
+        line-height: 1.18;
+      }
+
+      .execution-chain {
+        display: grid;
+        grid-template-columns: 0.7fr 1.1fr 1fr;
+        gap: 34px;
+        align-items: stretch;
+      }
+
+      .goal-contract-slide {
+        grid-template-rows: auto auto;
+        align-content: center;
+        gap: 58px;
+      }
+
+      .chain-node {
+        display: grid;
+        align-content: start;
+        gap: 18px;
+        min-height: 440px;
+        padding-top: 28px;
+        border-top: 1px solid var(--line-carbon-strong);
+      }
+
+      .chain-node code {
+        width: fit-content;
+        padding: 10px 16px;
+        border: 1px solid var(--line-carbon-strong);
+        border-radius: var(--radius-elements);
+        color: var(--color-ghost-blue);
+        font-family: var(--mono);
+        font-size: 30px;
+      }
+
+      .chain-node b {
+        color: var(--color-starlight);
+        font-family: var(--font-display);
+        font-size: 38px;
+        font-weight: 480;
+        line-height: 1.08;
+      }
+
+      .chain-node span {
+        color: var(--color-silver);
+        font-size: 29px;
+        line-height: 1.18;
+      }
+
+      .goal-contract-slide .chain-node {
+        min-height: 230px;
+      }
+
+      .loop-steps {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 24px;
+        align-items: stretch;
+      }
+
+      .loop-step {
+        display: grid;
+        align-content: start;
+        gap: 14px;
+        min-height: 300px;
+        padding-top: 22px;
+        border-top: 1px solid var(--line-carbon-strong);
+      }
+
+      .loop-step b {
+        color: var(--color-starlight);
+        font-family: var(--font-display);
+        font-size: 31px;
+        font-weight: 480;
+        line-height: 1.08;
+      }
+
+      .loop-step span {
+        color: var(--color-silver);
+        font-size: 25px;
+        line-height: 1.18;
+      }
+
+      .verification-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 26px;
+      }
+
+      .verification-item {
+        display: grid;
+        align-content: start;
+        gap: 12px;
+        min-height: 150px;
+        padding-top: 18px;
+        border-top: 1px solid var(--line-carbon-strong);
+      }
+
+      .verification-item b {
+        color: var(--color-starlight);
+        font-family: var(--font-display);
+        font-size: 30px;
+        font-weight: 480;
+        line-height: 1.08;
+      }
+
+      .verification-item span {
+        color: var(--color-silver);
+        font-size: 24px;
+        line-height: 1.15;
+      }
+
+      .receipt-stack {
+        max-width: 1180px;
+      }
+
+      .receipt-list {
+        display: grid;
+        gap: 18px;
+        margin: 0;
+        padding-left: 1em;
+      }
+
+      .receipt-list li {
+        color: var(--color-silver);
+        font-size: 34px;
+        line-height: 1.15;
+      }
+
+      .screenshot-slide {
+        grid-template-rows: 1fr;
+        align-content: center;
+        padding-right: 0;
+      }
+
+      .screenshot-layout {
+        display: grid;
+        grid-template-columns: 30% 70%;
+        gap: 0;
+        align-items: center;
+        min-height: 100%;
+      }
+
+      .screenshot-copy {
+        display: grid;
+        gap: 28px;
+        align-content: center;
+        padding-right: 48px;
+      }
+
+      .screenshot-copy h1 {
+        font-size: 58px;
+        line-height: 1.05;
+      }
+
+      .screenshot-copy .lede {
+        font-size: 30px;
+        line-height: 1.22;
+      }
+
+      .screenshot-frame {
+        display: grid;
+        place-items: center;
+        width: 100%;
+        min-height: 720px;
+        padding: 0;
+        border: 1px solid var(--line-carbon-strong);
+        background: var(--color-pure-white);
+      }
+
+      .codex-response-shot {
+        display: block;
+        width: 100%;
+        height: 100%;
+        max-height: 720px;
+        object-fit: contain;
+      }
+
+      body.workbench-mode .slide.standard {
+        grid-template-rows: auto auto auto;
+        gap: 28px;
+      }
+
+      body.workbench-mode .intro-layout {
+        grid-template-columns: 1fr;
+        gap: 28px;
+      }
+
+      body.workbench-mode .intro-copy h1 {
+        font-size: 56px;
+      }
+
+      body.workbench-mode .intro-copy p {
+        font-size: 28px;
+      }
+
+      body.workbench-mode .profile-shot {
+        max-height: 46dvh;
+      }
+
+      body.workbench-mode .section-marker {
+        top: 22px;
+        left: 24px;
+        font-size: var(--min-readable-text);
+      }
+
+      body.workbench-mode .slide.why-slide {
+        align-content: center;
+        gap: 34px;
+      }
+
+      body.workbench-mode .slide.chapter-slide {
+        align-content: center;
+        gap: 30px;
+      }
+
+      body.workbench-mode .why-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+      }
+
+      body.workbench-mode .why-panel {
+        min-height: 230px;
+        gap: 18px;
+        padding-top: 20px;
+      }
+
+      body.workbench-mode .why-panel b,
+      body.workbench-mode .why-panel span {
+        font-size: var(--min-readable-text);
+      }
+
+      body.workbench-mode .statement-grid,
+      body.workbench-mode .issue-grid,
+      body.workbench-mode .demo-grid-compact {
+        grid-template-columns: 1fr;
+        gap: 18px;
+      }
+
+      body.workbench-mode .codex-worked-grid {
+        width: 100%;
+        min-height: auto;
+      }
+
+      body.workbench-mode .statement-card,
+      body.workbench-mode .issue-card,
+      body.workbench-mode .demo-panel {
+        gap: 12px;
+        padding-top: 16px;
+      }
+
+      body.workbench-mode .statement-card b,
+      body.workbench-mode .issue-card b,
+      body.workbench-mode .demo-panel b,
+      body.workbench-mode .statement-card span,
+      body.workbench-mode .issue-card span,
+      body.workbench-mode .demo-panel span,
+      body.workbench-mode .rail-row b,
+      body.workbench-mode .rail-row span {
+        font-size: var(--min-readable-text);
+      }
+
+      body.workbench-mode .rail-row {
+        grid-template-columns: 1fr;
+        gap: 6px;
+        padding: 12px 0;
+      }
+
+      body.workbench-mode .source-grid,
+      body.workbench-mode .source-grid.full-height-source {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      body.workbench-mode .source-points li,
+      body.workbench-mode .section-map-row b,
+      body.workbench-mode .section-map-row span {
+        font-size: var(--min-readable-text);
+      }
+
+      body.workbench-mode .book-cover {
+        max-height: 42dvh;
+      }
+
+      body.workbench-mode .book-cover.full-height-cover {
+        position: static;
+        width: 100%;
+        height: auto;
+      }
+
+      body.workbench-mode .compact-issue-list li {
+        font-size: var(--min-readable-text);
+      }
+
+      .kicker {
+        color: var(--color-silver);
+        font-size: 30px;
+        font-weight: 400;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+      }
+
+      body.workbench-mode .kicker {
+        font-size: var(--min-readable-text);
+      }
+
+      h1,
+      h2,
+      p {
+        margin: 0;
+      }
+
+      b,
+      strong {
+        font-weight: 480;
+      }
+
+      h1 {
+        max-width: 1420px;
+        color: var(--color-starlight);
+        font-family: var(--font-display);
+        font-size: 98px;
+        font-weight: 300;
+        line-height: 1.08;
+        letter-spacing: 0.01em;
+      }
+
+      body.workbench-mode h1 {
+        max-width: 920px;
+        font-size: 56px;
+        line-height: 1.12;
+      }
+
+      h2 {
+        max-width: 1320px;
+        color: var(--color-starlight);
+        font-family: var(--font-display);
+        font-size: 78px;
+        font-weight: 300;
+        line-height: 1.12;
+        letter-spacing: 0.01em;
+      }
+
+      body.workbench-mode h2 {
+        max-width: 860px;
+        font-size: 44px;
+      }
+
+      p,
+      li {
+        max-width: 1320px;
+        color: var(--color-starlight);
+        font-size: 42px;
+        font-weight: 360;
+        line-height: 1.25;
+        letter-spacing: 0.005em;
+      }
+
+      body.workbench-mode p,
+      body.workbench-mode li {
+        max-width: 820px;
+        font-size: 24px;
+      }
+
+      ul,
+      ol {
+        display: grid;
+        gap: 24px;
+        margin: 0;
+        padding-left: 1.1em;
+      }
+
+      code,
+      pre {
+        font-family: var(--mono);
+        font-size: 32px;
+        line-height: 1.28;
+      }
+
+      body.workbench-mode code,
+      body.workbench-mode pre {
+        font-size: var(--min-readable-text);
+      }
+
+      pre {
+        width: 100%;
+        margin: 0;
+        padding: 30px 34px;
+        border: 1px solid var(--color-lead);
+        background: var(--surface-interactive);
+        color: var(--color-starlight);
+        white-space: pre-wrap;
+      }
+
+      .big {
+        font-size: 112px;
+        line-height: 1.05;
+      }
+
+      body.workbench-mode .big {
+        font-size: 64px;
+      }
+
+      .lede {
+        max-width: 1240px;
+        color: var(--color-silver);
+        font-size: 48px;
+        font-weight: 360;
+        line-height: 1.22;
+        letter-spacing: 0.01em;
+      }
+
+      body.workbench-mode .lede {
+        max-width: 820px;
+        font-size: 26px;
+      }
+
+      .split {
+        display: grid;
+        grid-template-columns: 0.95fr 1.05fr;
+        align-items: center;
+        gap: 84px;
+      }
+
+      body.workbench-mode .split {
+        grid-template-columns: 1fr;
+        gap: 28px;
+      }
+
+      .stack {
+        display: grid;
+        align-content: center;
+        gap: 30px;
+      }
+
+      body.workbench-mode .stack {
+        gap: 20px;
+      }
+
+      .factory-close-slide {
+        grid-template-rows: 1fr;
+        align-content: stretch;
+      }
+
+      .factory-close-layout {
+        display: block;
+        width: 50%;
+        height: 100%;
+      }
+
+      .factory-close-copy {
+        display: grid;
+        align-content: center;
+        gap: 34px;
+        min-height: 100%;
+        padding-right: 70px;
+        padding-bottom: 190px;
+      }
+
+      .factory-close-copy h1 {
+        max-width: 790px;
+        font-size: 84px;
+        line-height: 1.06;
+      }
+
+      .factory-close-copy .lede {
+        max-width: 780px;
+        font-size: 35px;
+        line-height: 1.22;
+      }
+
+      .factory-close-copy .lede-stack {
+        display: grid;
+        gap: 18px;
+      }
+
+      .factory-close-copy .lede-stack span {
+        display: block;
+      }
+
+      .factory-close-visual {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        display: grid;
+        width: 50%;
+        align-items: center;
+      }
+
+      .factory-close-diagram {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        object-fit: contain;
+        background: var(--color-pure-white);
+      }
+
+      body.workbench-mode .factory-close-layout {
+        width: 100%;
+        gap: 28px;
+      }
+
+      body.workbench-mode .factory-close-copy {
+        padding-bottom: 0;
+        padding-right: 0;
+      }
+
+      body.workbench-mode .factory-close-copy h1 {
+        max-width: 820px;
+        font-size: 52px;
+      }
+
+      body.workbench-mode .factory-close-copy .lede {
+        max-width: 820px;
+        font-size: 24px;
+      }
+
+      body.workbench-mode .factory-close-copy .lede-stack {
+        gap: 14px;
+      }
+
+      body.workbench-mode .factory-close-visual {
+        position: relative;
+        min-height: auto;
+        width: 100%;
+      }
+
+      .resource-close-slide {
+        grid-template-rows: auto auto;
+        align-content: center;
+        gap: 42px;
+      }
+
+      .resource-close-slide .stack {
+        max-width: 1180px;
+      }
+
+      .resource-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr);
+        gap: 24px;
+        align-items: stretch;
+      }
+
+      .resource-card {
+        display: grid;
+        grid-template-columns: 220px minmax(0, 1fr);
+        gap: 32px;
+        align-items: center;
+        min-height: 205px;
+        padding-top: 20px;
+        border-top: 1px solid var(--line-carbon-strong);
+        color: var(--color-silver);
+        text-decoration: none;
+      }
+
+      .resource-card img {
+        width: 220px;
+        height: 220px;
+        padding: 12px;
+        background: var(--color-pure-white);
+      }
+
+      .resource-card b {
+        display: block;
+        color: var(--color-starlight);
+        font-family: var(--font-display);
+        font-size: 38px;
+        font-weight: 480;
+        line-height: 1.08;
+      }
+
+      .resource-copy {
+        display: block;
+      }
+
+      .resource-copy span {
+        display: block;
+        margin-top: 18px;
+        color: var(--color-silver);
+        font-size: 28px;
+        line-height: 1.2;
+      }
+
+      body.workbench-mode .resource-grid,
+      body.workbench-mode .resource-card {
+        grid-template-columns: 1fr;
+      }
+
+      body.workbench-mode .resource-card img {
+        width: 180px;
+        height: 180px;
+      }
+
+      .proof-strip {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 28px;
+      }
+
+      body.workbench-mode .proof-strip {
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 16px;
+      }
+
+      .proof {
+        min-height: 190px;
+        padding: 28px 0;
+        border: 0;
+        border-top: 1px solid var(--color-lead);
+        border-radius: 0;
+        background: transparent;
+      }
+
+      body.workbench-mode .proof {
+        min-height: 150px;
+        padding: 20px;
+      }
+
+      .proof b {
+        display: block;
+        margin-bottom: 20px;
+        color: var(--color-starlight);
+        font-family: var(--font-display);
+        font-size: 32px;
+        font-weight: 480;
+        letter-spacing: 0.01em;
+      }
+
+      body.workbench-mode .proof b {
+        margin-bottom: 10px;
+        font-size: var(--min-readable-text);
+      }
+
+      .proof span {
+        display: block;
+        color: var(--color-silver);
+        font-size: 36px;
+        font-weight: 360;
+        line-height: 1.12;
+      }
+
+      body.workbench-mode .proof span {
+        font-size: 24px;
+      }
+
+      .visual-slot {
+        display: grid;
+        min-height: 610px;
+        place-items: center;
+        border: 1px solid var(--color-lead);
+        border-radius: 4px;
+        background: var(--surface-interactive);
+        color: var(--color-silver);
+        font-size: 46px;
+        font-weight: 360;
+        line-height: 1.2;
+        text-align: center;
+      }
+
+      body.workbench-mode .visual-slot {
+        min-height: 300px;
+        padding: 28px;
+        font-size: 26px;
+      }
+
+      .codex-shot {
+        width: 100%;
+        max-height: 640px;
+        object-fit: contain;
+        border: 1px solid var(--line-carbon-strong);
+        border-radius: 4px;
+        background: var(--color-pure-white);
+      }
+
+      body.workbench-mode .codex-shot {
+        max-height: 44dvh;
+      }
+
+      .runtime-badge-shot {
+        width: 100%;
+        height: auto;
+        border: 1px solid var(--line-carbon-strong);
+        border-radius: 4px;
+        background: var(--color-pure-white);
+      }
+
+      body.workbench-mode .runtime-badge-shot {
+        position: static;
+        width: 100%;
+        max-height: 42dvh;
+        transform: none;
+        border-right: 1px solid var(--line-carbon-strong);
+        border-radius: 4px;
+      }
+
+      .result-frame,
+      .primitive-grid,
+      .demo-grid,
+      .flow-map,
+      .zoom-panel,
+      .article-panel {
+        display: grid;
+        gap: 24px;
+      }
+
+      .result-frame {
+        grid-template-columns: 0.9fr 1.1fr;
+        align-items: stretch;
+      }
+
+      body.workbench-mode .result-frame {
+        grid-template-columns: 1fr;
+      }
+
+      .product-surface,
+      .receipt-surface,
+      .primitive,
+      .flow-step,
+      .zoom-card,
+      .demo-card,
+        .article-card {
+        border: 1px solid var(--line-carbon-strong);
+        border-radius: 4px;
+        background: rgba(39, 39, 53, 0.42);
+      }
+
+      .product-surface,
+      .receipt-surface,
+      .zoom-card,
+      .article-card {
+        padding: 26px;
+        border-radius: 4px;
+      }
+
+      .product-surface {
+        min-height: 400px;
+      }
+
+      body.workbench-mode .product-surface {
+        min-height: 320px;
+      }
+
+      .surface-title,
+      .primitive b,
+      .flow-step b,
+      .zoom-card b,
+      .demo-card b,
+      .article-card b {
+        display: block;
+        color: var(--color-starlight);
+        font-family: var(--font-display);
+        font-size: 34px;
+        font-weight: 480;
+        line-height: 1.12;
+      }
+
+      body.workbench-mode .surface-title,
+      body.workbench-mode .primitive b,
+      body.workbench-mode .flow-step b,
+      body.workbench-mode .zoom-card b,
+      body.workbench-mode .demo-card b,
+      body.workbench-mode .article-card b {
+        font-size: var(--min-readable-text);
+      }
+
+      .surface-lines,
+      .receipt-lines {
+        display: grid;
+        gap: 8px;
+        margin-top: 20px;
+      }
+
+      .surface-line,
+      .receipt-line {
+        display: flex;
+        justify-content: space-between;
+        gap: 18px;
+        padding: 10px 0;
+        border-top: 1px solid rgba(112, 112, 125, 0.72);
+        color: var(--color-silver);
+        font-size: 24px;
+        line-height: 1.24;
+      }
+
+      body.workbench-mode .surface-line,
+      body.workbench-mode .receipt-line {
+        font-size: var(--min-readable-text);
+      }
+
+      .status-pill {
+        align-self: start;
+        min-width: 132px;
+        padding: 8px 18px;
+        border: 1px solid rgba(205, 221, 255, 0.55);
+        border-radius: var(--radius-pill);
+        background: transparent;
+        color: var(--color-starlight);
+        font-size: 24px;
+        text-align: center;
+      }
+
+      .receipt-surface {
+        align-content: start;
+      }
+
+      .primitive-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+
+      body.workbench-mode .primitive-grid {
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      }
+
+      .primitive,
+      .demo-card {
+        min-height: 188px;
+        padding: 24px;
+      }
+
+      .primitive span,
+      .flow-step span,
+      .zoom-card span,
+      .demo-card span,
+      .article-card span {
+        display: block;
+        margin-top: 14px;
+        color: var(--color-silver);
+        font-size: 28px;
+        font-weight: 360;
+        line-height: 1.25;
+      }
+
+      body.workbench-mode .primitive span,
+      body.workbench-mode .flow-step span,
+      body.workbench-mode .zoom-card span,
+      body.workbench-mode .demo-card span,
+      body.workbench-mode .article-card span {
+        font-size: var(--min-readable-text);
+      }
+
+      .flow-map {
+        grid-template-columns: repeat(5, 1fr);
+        align-items: stretch;
+      }
+
+      body.workbench-mode .flow-map {
+        grid-template-columns: 1fr;
+      }
+
+      .flow-step {
+        position: relative;
+        min-height: 220px;
+        padding: 24px;
+      }
+
+      .flow-step:not(:last-child)::after {
+        content: "->";
+        position: absolute;
+        top: 38px;
+        right: -22px;
+        color: var(--color-ghost-blue);
+        font-size: 34px;
+      }
+
+      body.workbench-mode .flow-step:not(:last-child)::after {
+        content: "";
+      }
+
+      .zoom-panel {
+        grid-template-columns: 0.82fr 1.18fr;
+        align-items: stretch;
+      }
+
+      body.workbench-mode .zoom-panel {
+        grid-template-columns: 1fr;
+      }
+
+      .zoom-card {
+        display: grid;
+        align-content: space-between;
+        min-height: 360px;
+      }
+
+      body.workbench-mode .zoom-card {
+        min-height: 260px;
+      }
+
+      .demo-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+
+      body.workbench-mode .demo-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .article-panel {
+        grid-template-columns: 1.2fr 0.8fr;
+        align-items: stretch;
+      }
+
+      body.workbench-mode .article-panel {
+        grid-template-columns: 1fr;
+      }
+
+      .article-card {
+        min-height: 360px;
+      }
+
+      .pipeline {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        gap: 18px;
+        align-items: stretch;
+      }
+
+      body.workbench-mode .pipeline {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+
+      .pipeline-step,
+      .signal-row,
+      .tree-node {
+        border-top: 1px solid var(--color-lead);
+      }
+
+      .pipeline-step {
+        display: grid;
+        min-height: 220px;
+        align-content: space-between;
+        gap: 28px;
+        padding: 28px 0 0;
+      }
+
+      body.workbench-mode .pipeline-step {
+        min-height: auto;
+        gap: 10px;
+        padding-top: 16px;
+      }
+
+      .pipeline-step b,
+      .signal-row b,
+      .tree-node b {
+        display: block;
+        color: var(--color-starlight);
+        font-family: var(--font-display);
+        font-size: 30px;
+        font-weight: 480;
+        line-height: 1.12;
+        letter-spacing: 0.01em;
+      }
+
+      body.workbench-mode .pipeline-step b,
+      body.workbench-mode .signal-row b,
+      body.workbench-mode .tree-node b {
+        font-size: var(--min-readable-text);
+      }
+
+      .pipeline-step span,
+      .signal-row span,
+      .tree-node span {
+        display: block;
+        color: var(--color-silver);
+        font-size: 26px;
+        font-weight: 360;
+        line-height: 1.24;
+      }
+
+      body.workbench-mode .pipeline-step span,
+      body.workbench-mode .signal-row span,
+      body.workbench-mode .tree-node span {
+        font-size: var(--min-readable-text);
+      }
+
+      .signal-list {
+        display: grid;
+        gap: 0;
+      }
+
+      .signal-row {
+        display: grid;
+        grid-template-columns: 0.82fr 1.18fr;
+        gap: 44px;
+        align-items: start;
+        min-height: 100px;
+        padding: 20px 0;
+      }
+
+      body.workbench-mode .signal-row {
+        grid-template-columns: 1fr;
+        gap: 8px;
+        min-height: auto;
+        padding: 18px 0;
+      }
+
+      .tech-tree {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 32px;
+        align-items: start;
+      }
+
+      body.workbench-mode .tech-tree {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+
+      .tree-node {
+        min-height: 190px;
+        padding-top: 28px;
+      }
+
+      body.workbench-mode .tree-node {
+        min-height: auto;
+        padding-top: 16px;
+      }
+
+      .quote-line {
+        max-width: 1500px;
+        color: var(--color-starlight);
+        font-family: var(--font-display);
+        font-size: 74px;
+        font-weight: 360;
+        line-height: 1.12;
+        letter-spacing: 0.01em;
+      }
+
+      body.workbench-mode .quote-line {
+        max-width: 900px;
+        font-size: 40px;
+      }
+
+      .caption {
+        color: var(--color-silver);
+        font-size: 30px;
+        line-height: 1.22;
+      }
+
+      .footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 32px;
+        padding-top: 20px;
+        border-top: 1px solid var(--line-carbon);
+        color: var(--color-silver);
+        font-size: 26px;
+        font-weight: 360;
+        line-height: 1.35;
+      }
+
+      body.workbench-mode .footer {
+        flex-wrap: wrap;
+        gap: 10px 18px;
+        font-size: var(--min-readable-text);
+      }
+
+      .slide-number {
+        display: none;
+      }
+
+      body.workbench-mode .slide-number {
+        font-size: var(--min-readable-text);
+      }
+
+      .hud {
+        position: fixed;
+        right: 18px;
+        bottom: 16px;
+        z-index: 10;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        color: var(--color-starlight);
+        font: var(--min-readable-text) / 1.2 var(--font);
+        opacity: 0.72;
+        pointer-events: none;
+      }
+
+      body.workbench-mode .hud {
+        padding: 8px 10px;
+        border: 1px solid var(--line-carbon);
+        border-radius: var(--radius-pill);
+        background: rgba(39, 39, 53, 0.86);
+        opacity: 0.9;
+      }
+
+      body.presentation-mode .hud {
+        display: none;
+      }
+
+      .notes-panel {
+        position: fixed;
+        left: 16px;
+        right: 16px;
+        bottom: 16px;
+        z-index: 20;
+        display: none;
+        max-height: 28vh;
+        padding: 18px 22px;
+        border: 1px solid var(--color-lead);
+        border-radius: var(--radius-elements);
+        background: rgba(30, 30, 42, 0.96);
+        color: var(--color-starlight);
+        font-size: var(--min-readable-text);
+        line-height: 1.4;
+        overflow: auto;
+      }
+
+      body.notes-visible .notes-panel {
+        display: block;
+      }
+
+      .notes {
+        display: none;
+      }
+
+      body.show-grid .slide.active::before {
+        content: "";
+        position: absolute;
+        inset: var(--safe-y) var(--safe-x);
+        border: 1px solid rgba(205, 221, 255, 0.45);
+        pointer-events: none;
+      }
+
+      body.show-grid .slide.active::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image: linear-gradient(rgba(205, 221, 255, 0.06) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(205, 221, 255, 0.06) 1px, transparent 1px);
+        background-size: 120px 120px;
+        pointer-events: none;
+      }
+
+      .help {
+        position: fixed;
+        top: 16px;
+        right: 16px;
+        z-index: 30;
+        display: none;
+        width: 360px;
+        padding: 16px 18px;
+        border: 1px solid var(--color-lead);
+        border-radius: var(--radius-elements);
+        background: rgba(30, 30, 42, 0.96);
+        color: var(--color-starlight);
+        font-size: var(--min-readable-text);
+        line-height: 1.45;
+      }
+
+      body.help-visible .help {
+        display: block;
+      }
+
+      .stage-only {
+        display: none;
+      }
+
+      body.presentation-mode .stage-only {
+        display: inline;
+      }
+
+      .workbench-only {
+        display: inline;
+      }
+
+      body.presentation-mode .workbench-only {
+        display: none;
+      }
+
+      @media (max-width: 760px) {
+        body.workbench-mode {
+          padding: 14px;
+        }
+
+        body.workbench-mode .deck {
+          min-height: calc(100dvh - 28px);
+          margin-bottom: 72px;
+        }
+
+        body.workbench-mode .slide {
+          min-height: calc(100dvh - 28px);
+          padding: 24px;
+        }
+
+        body.workbench-mode h1,
+        body.workbench-mode .big {
+          font-size: 42px;
+        }
+
+        body.workbench-mode h2 {
+          font-size: 34px;
+        }
+
+        body.workbench-mode p,
+        body.workbench-mode li,
+        body.workbench-mode .proof span,
+        body.workbench-mode .lede {
+          font-size: var(--min-readable-text);
+        }
+      }
+
+      @media print {
+        html,
+        body {
+          height: auto;
+          overflow: visible;
+          background: var(--surface-abyss);
+        }
+
+        .deck {
+          width: 1920px;
+          height: auto;
+          transform: none !important;
+          background: var(--surface-surface);
+        }
+
+        .slide {
+          position: relative;
+          display: grid !important;
+          width: 1920px;
+          height: 1080px;
+          page-break-after: always;
+        }
+
+        .hud,
+        .help,
+        .notes-panel {
+          display: none !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="deck" aria-live="polite">
+      <section class="slide full-bleed active" data-title="Codex for Product/Harness Engineering">
+        <img
+          class="slide-image"
+          src="assets/codex-title-research-workflows.png"
+          alt="Using Codex for Product/Harness Engineering, sharing research and workflows from six months of heavy Codex usage"
+        />
+        <aside class="notes"></aside>
+      </section>
+
+      <section class="slide standard intro-slide" data-title="Who I Am">
+        <div class="section-marker" aria-label="Section 1">1</div>
+        <div class="intro-layout">
+          <div class="intro-copy">
+            <h1>Hi, I'm Danial Hasan</h1>
+            <p>I'm an applied AI engineer building products and harnesses with agents.</p>
+          </div>
+          <img
+            class="profile-shot"
+            src="assets/twitter-profile-danial-hasan.png"
+            alt="Danial Hasan Twitter profile"
+          />
+        </div>
+        <aside class="notes"></aside>
+      </section>
+
+      <section class="slide standard why-slide" data-title="Why Codex">
+        <div class="section-marker" aria-label="Section 2">2</div>
+        <div class="stack">
+          <h1>I'm playing with Codex to build better agentic products.</h1>
+          <p class="lede">Agentic products combine two types of engineering: the product surface and the agent harness. Codex can drive both.</p>
+        </div>
+        <div class="why-grid">
+          <div class="why-panel">
+            <b>Product engineering</b>
+            <span>Build the product surface users interact with.</span>
+          </div>
+          <div class="why-panel">
+            <b>Harness engineering</b>
+            <span>Shape the agent system to complete tasks we care about.</span>
+          </div>
+        </div>
+        <aside class="notes">I am playing with Codex because I have been exploring how I can build better agentic products in the same working loop.</aside>
+      </section>
+
+      <section class="slide standard chapter-slide" data-title="Codex For Product Engineering">
+        <div class="section-marker" aria-label="Section 2.1">2.1</div>
+        <div class="stack">
+          <h1>Codex for Product Engineering</h1>
+          <p class="lede">I started by using Codex the obvious way: brain dump into it, refine that into a plan, then let it execute.</p>
+        </div>
+        <aside class="notes">First I want to show the product-engineering side. I started with what most people would call vibe coding. Codex could absolutely move the code. The issue was that the work was not reliably shaped. Demo prompt: Use fast mode. Make a small visible product change to this slide deck. Keep it scoped, then tell me what changed and what you did not verify. Artifact: one small code diff plus a short summary.</aside>
+      </section>
+
+      <section class="slide standard chapter-slide" data-title="Codex Worked">
+        <div class="section-marker" aria-label="Section 2.2">2.2</div>
+        <div class="demo-grid-compact codex-worked-grid">
+          <div class="stack">
+            <h1>It worked surprisingly well.</h1>
+            <p class="lede">Codex could move real code and get visible product changes onto the screen.</p>
+          </div>
+          <img class="runtime-badge-shot" src="assets/codex-worked-23m13s.png" alt="Codex run screenshot: worked for 23m 13s and got root code gates green" />
+        </div>
+        <aside class="notes">Use the 23m13s Codex run as proof that the obvious loop could carry a concrete product task through root code gates. The point is not that the loop was perfect; it is that Codex could keep moving real implementation forward.</aside>
+      </section>
+
+      <section class="slide standard chapter-slide media-stack-slide" data-title="Codex Did Not Scale Cleanly">
+        <div class="section-marker" aria-label="Section 2.3">2.3</div>
+        <div class="edge-media-stack" aria-label="Screenshots of public commentary on agent codebase maintainability">
+          <img src="assets/agent-codebase-garbage-mario.png" alt="Mario Zechner post about agents creating unmaintainable codebases without supervision" />
+          <img src="assets/llm-productivity-boost-cramer.png" alt="David Cramer post about LLMs creating complex software that slows long-term velocity" />
+        </div>
+        <div class="demo-grid-compact">
+          <div class="stack">
+            <h1>Vibe coding doesn't scale cleanly.</h1>
+            <ul class="compact-issue-list">
+              <li>It finished pieces, but missed the whole job.</li>
+              <li>It built parts that were not wired together.</li>
+              <li>I still had to figure out what happened.</li>
+            </ul>
+          </div>
+        </div>
+        <aside class="notes">On my mark, stage a fast-mode Codex run that shows the bigger-task failure mode: a plan, execution, and some gap around proof, auditability, or fake acceptance. Screenshot it as the counterexample. The point is not that Codex is bad; the point is that bigger product work needs guardrails.</aside>
+      </section>
+
+      <section class="slide standard chapter-slide" data-title="Why The Problems Exist">
+        <div class="section-marker" aria-label="Section 2.4">2.4</div>
+        <div class="factory-trap-grid">
+          <div class="stack">
+            <h1>Why do agents like Codex fail in this context?</h1>
+            <ul class="cause-list">
+              <li>Code shows what changed, but not why it mattered.</li>
+              <li>Agents can edit files without knowing the real decision.</li>
+              <li>When proof is missing, review becomes detective work.</li>
+            </ul>
+          </div>
+        </div>
+        <img class="iceberg-image" src="assets/software-engineering-iceberg.jpeg" alt="Software engineering iceberg showing visible codebase above hidden decision context" />
+        <aside class="notes">The reason the previous problems exist is that code is only the executable surface of a larger object. The runtime does not need requirements, derivation, customer context, source authority, or proof obligations, so those things disappear unless the workflow captures them. Agents mostly see the visible codebase. If they are asked to extend a system from that partial context, they produce syntactically correct and semantically incomplete work. That is why the bottleneck moves from code generation to trusted outcomes.</aside>
+      </section>
+
+      <section class="slide standard chapter-slide transition-claim" data-title="How Do We Fix It">
+        <div class="section-marker" aria-label="Section 2.5">2.5</div>
+        <div class="stack">
+          <h1>So how do we fix it?</h1>
+          <p class="lede">We look for what engineers in the 90s came up with, encode those into skills, and serve them in the harness.</p>
+        </div>
+        <aside class="notes">This is the transition. The Dvorak discovery call made the shape concrete: teams were already building a homegrown docs, specs, orchestration, tests, and review machine around agents, and the tax was maintaining that machine. The exact old ideas are requirements discovery, source authority, fit criteria, traceability, work breakdown, proof surfaces, verification, review packets, and staleness. The new move is to encode those ideas into skills and serve them in the harness so the agent can actually run the doctrine instead of hearing it as advice.</aside>
+      </section>
+
+      <section class="slide standard chapter-slide" data-title="Engineering Discipline Map">
+        <div class="section-marker" aria-label="Section 2.5.1">2.5.1</div>
+        <div class="stack">
+          <h1>We turn old engineering discipline into skills Codex can run.</h1>
+        </div>
+        <div class="section-map-list">
+          <div class="section-map-row">
+            <b>requirements engineering</b>
+            <span>Turn messy intent into claims we can verify.</span>
+          </div>
+          <div class="section-map-row">
+            <b>implementation contracts</b>
+            <span>Tell Codex what to change and what not to touch.</span>
+          </div>
+          <div class="section-map-row">
+            <b>execution orchestration</b>
+            <span>Split work into lanes agents can own.</span>
+          </div>
+          <div class="section-map-row">
+            <b>layered verification</b>
+            <span>Match each claim to the proof that actually checks it.</span>
+          </div>
+          <div class="section-map-row">
+            <b>receipt closeout</b>
+            <span>Leave links a human or agent can audit later.</span>
+          </div>
+        </div>
+        <aside class="notes">This is the map before the examples. The point is not that one book or one method solves agents. The plugin borrows old engineering discipline and turns it into runtime sections: requirements engineering, planning contracts, execution orchestration, review reconciliation, and release handoff. Requirements and orchestration are the two examples I will expand because they are where the agent failure mode is easiest to see.</aside>
+      </section>
+
+      <section class="slide standard chapter-slide" data-title="Requirements Engineering">
+        <div class="section-marker" aria-label="Section 2.6">2.6</div>
+        <div class="source-grid">
+          <div class="stack">
+            <h1>Plan mode is too naive when requirements are recursive.</h1>
+            <p class="lede">Requirements engineering solves these problems:</p>
+            <ul class="source-points">
+              <li>One prompt hides multiple actors, scenarios, and business contexts.</li>
+              <li>Plans jump to implementation before asking what must be true.</li>
+              <li>Source authority, fit criteria, and risky assumptions stay implicit.</li>
+              <li>Proof gets substituted: screenshots for state, backend tests for journeys.</li>
+              <li>Review becomes reconstructing intent from a plausible final diff.</li>
+            </ul>
+          </div>
+          <img class="book-cover" src="assets/requirements-process-cover.png" alt="Cover of Requirements Engineering: Processes and Techniques by Gerald Kotonya and Ian Sommerville" />
+        </div>
+        <aside class="notes">This is the biggest one. Normal plan mode in AI apps is too naive for real engineering work because requirements are recursive. The agent makes a plan from the prompt, but the plan itself reveals missing actors, scenarios, constraints, source authority, and proof questions. Requirements engineering gives us the better loop: discover, classify, split, validate, and only then plan execution. For Codex, that means a vague prompt becomes requirement rows: actor, scenario, claims, type, fit criterion, source, assumptions, proof surface, forbidden proof substitutions, autonomous verification, and the human judgment packet.</aside>
+      </section>
+
+      <section class="slide standard chapter-slide" data-title="Codex With Requirements Engineering">
+        <div class="section-marker" aria-label="Section 2.6.1">2.6.1</div>
+        <div class="stack">
+          <h1>Requirements engineering makes plans better.</h1>
+          <p class="lede">The extra context gives Codex something concrete to verify against.</p>
+        </div>
+        <div class="requirements-breakdown">
+          <div class="requirements-item">
+            <b>actors and scenarios</b>
+            <span>Who it matters to, the business context, and the scenario they are in.</span>
+          </div>
+          <div class="requirements-item">
+            <b>distinct claims</b>
+            <span>Each user, system, state, permission, and review claim is split apart.</span>
+          </div>
+          <div class="requirements-item">
+            <b>source authority</b>
+            <span>Which code, doc, ticket, customer source, or external source is allowed to decide.</span>
+          </div>
+          <div class="requirements-item">
+            <b>fit criteria and proof</b>
+            <span>What must be true, and which proof surface can actually validate it.</span>
+          </div>
+          <div class="requirements-item">
+            <b>forbidden substitutions</b>
+            <span>Auth flow: screenshot is not enough.<br />Need traces and DB verification.</span>
+          </div>
+          <div class="requirements-item">
+            <b>verification and judgment</b>
+            <span>What the agent verifies autonomously, and what the human still has to judge.</span>
+          </div>
+        </div>
+        <aside class="notes">This is what requirements engineering adds before Codex plans execution. It forces the prompt to become actors, scenarios, distinct claims, source authority, assumptions to falsify, fit criteria, proof surfaces, forbidden proof substitutions, autonomous verification, and the human judgment packet. The point is not a bigger plan. The point is a map Codex can verify against, so review does not become reconstructing intent from a mystery diff.</aside>
+      </section>
+
+      <section class="slide standard chapter-slide screenshot-slide" data-title="Codex Without Requirements Engineering">
+        <div class="section-marker" aria-label="Section 2.6.2">2.6.2</div>
+        <div class="screenshot-layout">
+          <div class="screenshot-copy">
+            <h1>Without requirements engineering, Codex writes a plausible plan.</h1>
+            <p class="lede">The plan makes sense, but it waves away too much detail, and that's how agents produce garbage.</p>
+          </div>
+          <div class="screenshot-frame">
+            <img class="codex-response-shot" src="assets/codex-without-requirements-engineering.png" alt="Codex response with a generic implementation plan and no explicit requirements engineering" />
+          </div>
+        </div>
+        <aside class="notes">This is what the naive plan looks like. It is not wrong in an obvious way. That is the problem. The plan sounds scoped and professional, but it does not say who the actor is, which claim is being made, which source has authority, what assumption could be false, what proof surface validates the result, or what the reviewer should judge. It compresses everything into implementation activity.</aside>
+      </section>
+
+      <section class="slide standard chapter-slide screenshot-slide" data-title="Codex With A Requirements Map">
+        <div class="section-marker" aria-label="Section 2.6.3">2.6.3</div>
+        <div class="screenshot-layout">
+          <div class="screenshot-copy">
+            <h1>With requirements engineering, Codex writes a verifiable map.</h1>
+            <p class="lede">The extra detail makes it easy to catch issues before they happen, and makes agentic work easier to verify. This means you can delegate more ambitious work with Codex.</p>
+          </div>
+          <div class="screenshot-frame">
+            <img class="codex-response-shot" src="assets/codex-with-requirements-engineering.png" alt="Codex response with a requirements map including claims, actors, fit criteria, proof surfaces, and assumptions" />
+          </div>
+        </div>
+        <aside class="notes">This is the same kind of task with requirements engineering turned on. The output is larger, and for bigger projects it can become a lot to review. But the extra context changes what verification means. Codex now has claims, actors, fit criteria, proof surfaces, and assumptions to check against. The reviewer is no longer reconstructing intent from the final diff.</aside>
+      </section>
+
+      <section class="slide standard chapter-slide" data-title="NASA WBS">
+        <div class="section-marker" aria-label="Section 2.7">2.7</div>
+        <div class="source-grid full-height-source">
+          <div class="stack">
+            <h1>Agents must be taught how to orchestrate their workers.</h1>
+            <p class="lede">Execution orchestration solves these problems:</p>
+            <ul class="source-points">
+              <li>Agents collide when no one owns the lane.</li>
+              <li>Tests break when another lane changes the contract.</li>
+              <li>The human gets stuck merging everything by hand.</li>
+            </ul>
+          </div>
+          <img class="book-cover full-height-cover" src="assets/nasa-wbs-handbook-cover.png" alt="Cover of NASA Work Breakdown Structure Handbook, January 2018" />
+        </div>
+        <aside class="notes">Once requirements are split, the next failure is orchestration. Agents can spin up workers, but without a work breakdown and execution map they collide. The problems show up as two workers changing the same component, tests written against stale state, UI and backend lanes disagreeing on contract names, shared resources being mutated in parallel, and the human having to reconcile branches before verification can even begin. WBS is the source discipline underneath the execution map: define owned work objects, interfaces, dependencies, proof obligations, and completion criteria before workers start.</aside>
+      </section>
+
+      <section class="slide standard chapter-slide" data-title="Execution Orchestration">
+        <div class="section-marker" aria-label="Section 2.7.1">2.7.1</div>
+        <div class="stack">
+          <h1>Execution orchestration makes delegation safe.</h1>
+          <p class="lede">It turns approved work into owned, isolated, verifiable lanes.</p>
+        </div>
+        <div class="requirements-breakdown">
+          <div class="requirements-item">
+            <b>lane ownership</b>
+            <span>Which worker owns which product seam, file surface, and proof obligation.</span>
+          </div>
+          <div class="requirements-item">
+            <b>dependency waves</b>
+            <span>What can run together, and what must wait for another lane to land.</span>
+          </div>
+          <div class="requirements-item">
+            <b>serialized resources</b>
+            <span>Shared runtimes, DB state, Electron slots, and deploy surfaces that cannot collide.</span>
+          </div>
+          <div class="requirements-item">
+            <b>worktree isolation</b>
+            <span>Dedicated branch and worktree lanes for mutating parallel work.</span>
+          </div>
+          <div class="requirements-item">
+            <b>proof responsibility</b>
+            <span>Each lane knows what evidence it must leave behind before review.</span>
+          </div>
+          <div class="requirements-item">
+            <b>review convergence</b>
+            <span>How isolated work collapses back into one human-judgable packet.</span>
+          </div>
+        </div>
+        <aside class="notes">Execution orchestration is where delegation becomes concrete. The plugin does not just say spawn workers. It asks which tickets or seams can run together, which surfaces collide, which resources must serialize, which branch or worktree owns each lane, what proof each lane is responsible for, and how the work will converge for review. Without that map, parallel agents look busy but create review chaos.</aside>
+      </section>
+
+      <section class="slide standard chapter-slide screenshot-slide" data-title="Codex Without Execution Orchestration">
+        <div class="section-marker" aria-label="Section 2.7.2">2.7.2</div>
+        <div class="screenshot-layout">
+          <div class="screenshot-copy">
+            <h1>Without execution orchestration, Codex creates busy workers.</h1>
+            <p class="lede">The work splits, but ownership does not. That is how agents collide.</p>
+          </div>
+          <div class="screenshot-frame">
+            <img class="codex-response-shot" src="assets/codex-without-execution-orchestration-conflicts.png" alt="Codex response showing conflict repair after workers touched the same code without execution orchestration" />
+          </div>
+        </div>
+        <aside class="notes">This is the failure mode. Codex can create workers, but if the lanes are vague, the workers collide. Two agents can touch the same files, assume the same runtime slot, duplicate work, or optimize locally while breaking the larger contract. The plan feels parallel, but it has not made ownership real.</aside>
+      </section>
+
+      <section class="slide standard chapter-slide screenshot-slide" data-title="Codex With Execution Orchestration">
+        <div class="section-marker" aria-label="Section 2.7.3">2.7.3</div>
+        <div class="screenshot-layout">
+          <div class="screenshot-copy">
+            <h1>With execution orchestration, Codex delegates owned work.</h1>
+            <p class="lede">Parallelism becomes reviewable because every lane has a boundary, proof target, and convergence path.</p>
+          </div>
+          <div class="screenshot-frame">
+            <img class="codex-response-shot" src="assets/codex-execution-orchestration-dag.png" alt="Codex response building the execution dependency graph before spawning workers" />
+          </div>
+        </div>
+        <aside class="notes">With execution orchestration, Codex does not just parallelize. It assigns ownership. The lane map says what can run together, what must serialize, what each lane owns, what proof it must leave behind, and where the work converges for review. That makes bigger delegated work safer because the human is not untangling a pile of agent activity at the end.</aside>
+      </section>
+
+      <section class="slide standard chapter-slide screenshot-slide" data-title="Codex With Execution Orchestration Map">
+        <div class="section-marker" aria-label="Section 2.7.4">2.7.4</div>
+        <div class="screenshot-layout">
+          <div class="screenshot-copy">
+            <h1>With execution orchestration, Codex delegates owned work.</h1>
+            <p class="lede">Parallelism becomes reviewable because every lane has a boundary, proof target, and convergence path.</p>
+          </div>
+          <div class="screenshot-frame">
+            <img class="codex-response-shot" src="assets/codex-execution-orchestration-map.png" alt="Codex response turning the dependency graph into an execution lane map" />
+          </div>
+        </div>
+        <aside class="notes">The second step is the execution map. In the Codex clip, capture the execution-orchestration skill producing Mermaid dependency diagrams, execution waves, lane ownership, serialized-resource notes, proof targets, and convergence. This is the difference between parallel agent activity and delegated work that remains reviewable.</aside>
+      </section>
+
+      <section class="slide standard chapter-slide goal-contract-slide" data-title="Goal Executes Contract">
+        <div class="section-marker" aria-label="Section 2.10">2.10</div>
+        <div class="stack">
+          <h1>Implementation starts when `/goal` executes a signed-off Linear contract.</h1>
+          <p class="lede">By this point, Codex is not discovering what to build from scratch. It is executing a contract that already contains the seam, lanes, and proof obligations.</p>
+        </div>
+        <div class="execution-chain">
+          <div class="chain-node">
+            <code>/goal</code>
+            <b>execution entrypoint</b>
+            <span>The user points Codex at the implementation ticket, not a loose prompt.</span>
+          </div>
+          <div class="chain-node">
+            <b>Linear implementation contract</b>
+            <span>Requirements engineering and execution orchestration are already compiled into the ticket.</span>
+          </div>
+          <div class="chain-node">
+            <b>dev/test composition</b>
+            <span>Codex enters the multi-agent implementation, review, patch, and verification loop named by the contract.</span>
+          </div>
+        </div>
+        <aside class="notes">This is the jump into implementation. We are not redoing requirements engineering or orchestration. The assumption is that those have produced a signed-off implementation contract in Linear. The demo entrypoint is slash goal, but slash goal is no longer a vibe prompt. It points Codex at a contract: one seam, non-goals, source of truth, lane plan, dev test composition, layered verification, and receipt targets.</aside>
+      </section>
+
+      <section class="slide standard chapter-slide" data-title="Implementation Contract Contents">
+        <div class="section-marker" aria-label="Section 2.10.1">2.10.1</div>
+        <div class="stack">
+          <h1>The implementation contract embeds the orchestration and proof plan.</h1>
+          <p class="lede">The ticket is structured so Codex can spend compute without expanding scope.</p>
+        </div>
+        <div class="requirements-breakdown">
+          <div class="requirements-item">
+            <b>seam</b>
+            <span>The one product surface, backend boundary, or runtime behavior being changed.</span>
+          </div>
+          <div class="requirements-item">
+            <b>non-goals</b>
+            <span>Explicit surfaces, ideas, and shortcuts Codex must not touch.</span>
+          </div>
+          <div class="requirements-item">
+            <b>source of truth</b>
+            <span>Canon, current runtime state, contract rows, DB/API surfaces, and allowed local state.</span>
+          </div>
+          <div class="requirements-item">
+            <b>lane map</b>
+            <span>Worker ownership, worktrees, file surfaces, dependencies, and serialized resources.</span>
+          </div>
+          <div class="requirements-item">
+            <b>dev/test composition</b>
+            <span>Multi-agent implementation, non-author review, patch loop, and re-review path.</span>
+          </div>
+          <div class="requirements-item">
+            <b>verification matrix</b>
+            <span>The required proof layers and receipt targets before closeout can be trusted.</span>
+          </div>
+        </div>
+        <aside class="notes">This slide explains why implementation can start at two point ten without rehashing the earlier section. The implementation contract is the bridge. It names the seam, non-goals, source of truth, lane map, dev test composition, verification matrix, and receipt targets. For the demo visual, use a Mermaid diagram where the overall plan fans out into implementation-contract nodes, each with its own scope, owner, dependencies, and proof obligations. That is how requirements engineering and execution orchestration show up during implementation: they are embedded in the ticket before Codex starts writing code.</aside>
+      </section>
+
+      <section class="slide standard chapter-slide" data-title="Implementation Loop">
+        <div class="section-marker" aria-label="Section 2.10.2">2.10.2</div>
+        <div class="stack">
+          <h1>Implementation is an iterative dev, review, and patch loop.</h1>
+          <p class="lede">The code change is only one step inside the contract-owned loop.</p>
+        </div>
+        <div class="loop-steps">
+          <div class="loop-step">
+            <b>read contract</b>
+            <span>Load the seam, proof matrix, lane ownership, and forbidden scope.</span>
+          </div>
+          <div class="loop-step">
+            <b>inspect code</b>
+            <span>Find the existing primitives, state owners, commands, and tests.</span>
+          </div>
+          <div class="loop-step">
+            <b>implement</b>
+            <span>Make the smallest green change inside the owned surface.</span>
+          </div>
+          <div class="loop-step">
+            <b>review + patch</b>
+            <span>Non-author review finds drift, bugs, missing proof, and abstraction mistakes.</span>
+          </div>
+          <div class="loop-step">
+            <b>receipt</b>
+            <span>Leave evidence, non-claims, and any remaining HOLD for the next gate.</span>
+          </div>
+        </div>
+        <aside class="notes">This is the implementation loop. Codex reads the contract, inspects code, implements the smallest green change, runs non-author review, patches issues, and leaves receipts. The important point is that implementation is not one codegen moment. It is where Codex spends compute, but the compute is bounded by the contract. Repeated failures become blockers or split signals, not hidden summaries.</aside>
+      </section>
+
+      <section class="slide standard chapter-slide" data-title="Layered Verification">
+        <div class="section-marker" aria-label="Section 2.11">2.11</div>
+        <div class="stack">
+          <h1>Layered verification lets you trade compute for robust engineering.</h1>
+          <p class="lede">Every layer is considered, then run, marked not required, or held with a reason.</p>
+        </div>
+        <div class="verification-grid">
+          <div class="verification-item">
+            <b>repo floor</b>
+            <span>lint, typecheck, test, build</span>
+          </div>
+          <div class="verification-item">
+            <b>property</b>
+            <span>invariants and generated cases</span>
+          </div>
+          <div class="verification-item">
+            <b>unit</b>
+            <span>local behavior and edge cases</span>
+          </div>
+          <div class="verification-item">
+            <b>contract</b>
+            <span>API, schema, command, or component contract</span>
+          </div>
+          <div class="verification-item">
+            <b>model</b>
+            <span>prompt, eval, trajectory, or model behavior proof</span>
+          </div>
+          <div class="verification-item">
+            <b>integration</b>
+            <span>cross-module and runtime interaction proof</span>
+          </div>
+          <div class="verification-item">
+            <b>smoke</b>
+            <span>the smallest live path that should not break</span>
+          </div>
+          <div class="verification-item">
+            <b>DB-backed</b>
+            <span>persisted state, RLS, query, or projection proof</span>
+          </div>
+          <div class="verification-item">
+            <b>Electron / UI</b>
+            <span>renderer, route, click path, and visible green state</span>
+          </div>
+          <div class="verification-item">
+            <b>Computer Use</b>
+            <span>human-like journey proof in the real app surface</span>
+          </div>
+          <div class="verification-item">
+            <b>telemetry</b>
+            <span>runtime queries that distinguish happy and negative paths</span>
+          </div>
+          <div class="verification-item">
+            <b>receipt</b>
+            <span>one verdict: VERIFIED, PARTIAL, or UNVERIFIED</span>
+          </div>
+        </div>
+        <aside class="notes">This is the layered verification slide. The key line is that layered verification lets you trade compute for robust engineering. Every ticket owes the repo floor unless explicitly not applicable: lint, typecheck, test, and build. Then Codex considers property, unit, contract, model, integration, smoke, DB-backed proof, Electron or UI proof, Computer Use journey proof, telemetry or runtime queries, and a final receipt verdict. Not every ticket needs every layer, but every layer has to be considered honestly.</aside>
+      </section>
+
+      <section class="slide standard chapter-slide" data-title="Proof Matches Claim">
+        <div class="section-marker" aria-label="Section 2.11.1">2.11.1</div>
+        <div class="stack">
+          <h1>Pick the verification layer for the part of the app you changed.</h1>
+          <p class="lede">Different parts of the app need different verification layers.</p>
+        </div>
+        <div class="section-map-list">
+          <div class="section-map-row">
+            <b>backend contract</b>
+            <span>API, contract, integration, and endpoint proof.</span>
+          </div>
+          <div class="section-map-row">
+            <b>durable state</b>
+            <span>DB-backed write, projection, RLS, query, or telemetry proof.</span>
+          </div>
+          <div class="section-map-row">
+            <b>UI journey</b>
+            <span>Electron route proof, click path, screenshots, and visible state.</span>
+          </div>
+          <div class="section-map-row">
+            <b>human interaction</b>
+            <span>Computer Use walkthrough or human runtime QA packet.</span>
+          </div>
+          <div class="section-map-row">
+            <b>model behavior</b>
+            <span>Eval, trace, trajectory, or dataset-backed repair proof.</span>
+          </div>
+        </div>
+        <aside class="notes">This is the explanatory slide after the layer list. The mistake is to run a familiar command and call it proof. The verification layer should match the part of the app that changed. Backend contracts need contract or integration proof. Durable state needs DB-backed proof. UI journeys need route and click proof. Human interaction can need Computer Use or human runtime QA. Model behavior needs evals, traces, trajectories, or datasets. This ties back to the requirements section: proof has to match the work.</aside>
+      </section>
+
+      <section class="slide standard chapter-slide" data-title="Closeout Receipts">
+        <div class="section-marker" aria-label="Section 2.12">2.12</div>
+        <div class="stack">
+          <h1>Closeout tells the human exactly what to review.</h1>
+          <p class="lede">The packet links each result to the proof or blocker behind it.</p>
+        </div>
+        <div class="receipt-stack">
+          <ul class="receipt-list">
+            <li>Start with a short review index.</li>
+            <li>Show what passed, what is blocked, and what was not claimed.</li>
+            <li>Link the exact receipts the human should inspect.</li>
+            <li>Keep proof gaps visible beside the evidence.</li>
+          </ul>
+        </div>
+        <aside class="notes">This is the closeout slide. The point is human review. Bring the closeout markdown document onto the screen and show that it tells the human exactly what to inspect: what passed, what is blocked, what was not claimed, and which receipt links prove each part. The human should not have to reconstruct the whole run from summaries or raw artifacts.</aside>
+      </section>
+
+      <section class="slide standard factory-close-slide" data-title="Software Factory">
+        <div class="section-marker" aria-label="Section 2.13">2.13</div>
+        <div class="factory-close-layout">
+          <div class="factory-close-copy">
+            <h1>These are early signs of a software factory.</h1>
+            <p class="lede lede-stack">
+              <span>Codex can move the code.</span>
+              <span>The hard part is keeping the context.</span>
+              <span>A factory is the workflow around the agent: requirements, proof, review, and trusted change.</span>
+            </p>
+          </div>
+          <div class="factory-close-visual">
+            <img class="factory-close-diagram" src="assets/factory-cross-section.jpeg" alt="Factory cross-section diagram showing requirements intake, context shaping, agent execution, proof checks, review packet, human approval, and trusted change" />
+          </div>
+        </div>
+        <aside class="notes">This is the close. Tie it back to the factory cross-section. Codex can move the code. The hard part is keeping the context: what the human wants, what the business cares about, what counts as proof, and why the work is worth doing. The diagram makes the core point visible: a software factory is a workflow, not a worker. The next slide gives people the research link and the skills repo.</aside>
+      </section>
+
+      <section class="slide standard resource-close-slide" data-title="Resources">
+        <div class="section-marker" aria-label="Resources">Links</div>
+        <div class="stack">
+          <h1>Three links to take with you.</h1>
+          <p class="lede">Everything is a markdown file nowadays smh.</p>
+        </div>
+        <div class="resource-grid">
+          <a class="resource-card" href="https://x.com/dhasandev/status/2057519809017897061" aria-label="Read more research about the software factory trap">
+            <img src="assets/software-factory-trap-x-qr.png" alt="QR code linking to more research about the software factory trap" />
+            <span class="resource-copy">
+              <b>More research</b>
+              <span>Scan for a detailed breakdown on what powers software factories.</span>
+            </span>
+          </a>
+          <a class="resource-card" href="https://github.com/danialhasan/ticket-swarm-workflow" aria-label="Open the Ticket Swarm Workflow skills repository">
+            <img src="assets/ticket-swarm-workflow-github-qr.png" alt="QR code linking to the Ticket Swarm Workflow skills repository" />
+            <span class="resource-copy">
+              <b>Workflow skills</b>
+              <span>Scan for the plugin that contains the skills discussed in the presentation.</span>
+            </span>
+          </a>
+          <a class="resource-card" href="https://trysquad.ai" aria-label="Open Try Squad">
+            <img src="assets/trysquad-ai-qr.png" alt="QR code linking to Try Squad" />
+            <span class="resource-copy">
+              <b>Check out the product</b>
+            </span>
+          </a>
+        </div>
+        <aside class="notes">Close with three calls to action. First: scan the research QR for a detailed breakdown on what powers software factories. Second: scan the skills QR for the plugin that contains the skills discussed in the presentation. Third: scan the Try Squad QR to see the product. Leave this slide up during Q&A.</aside>
+      </section>
+
+    </main>
+
+    <div class="notes-panel" id="notesPanel"></div>
+
+    <div class="help" aria-hidden="true">
+      <b>Controls</b><br />
+      Right / Space / PageDown: next<br />
+      Left / PageUp: previous<br />
+      Home / End: first / last<br />
+      P: stage/workbench mode<br />
+      F: fullscreen<br />
+      N: notes<br />
+      G: safe-area grid<br />
+      ?: help
+    </div>
+
+    <script>
+      const deck = document.querySelector(".deck");
+      const slides = Array.from(document.querySelectorAll(".slide"));
+      const progress = document.querySelector("#progress");
+      const modeLabel = document.querySelector("#modeLabel");
+      const notesPanel = document.querySelector("#notesPanel");
+      let index = 0;
+      const requestedMode = new URLSearchParams(window.location.search).get("mode");
+      let mode = requestedMode === "workbench" ? "workbench" : "presentation";
+
+      function scaleDeck() {
+        if (mode === "workbench") {
+          deck.style.transform = "none";
+          return;
+        }
+        const scale = Math.min(window.innerWidth / 1920, window.innerHeight / 1080);
+        deck.style.transform = `translate(-50%, -50%) scale(${scale})`;
+      }
+
+      function applyMode() {
+        document.body.classList.toggle("workbench-mode", mode === "workbench");
+        document.body.classList.toggle("presentation-mode", mode === "presentation");
+        if (modeLabel) modeLabel.textContent = mode === "workbench" ? "Workbench" : "Stage preview";
+        scaleDeck();
+      }
+
+      function toggleMode() {
+        mode = mode === "workbench" ? "presentation" : "workbench";
+        applyMode();
+      }
+
+      function render() {
+        slides.forEach((slide, i) => {
+          slide.classList.toggle("active", i === index);
+          let badge = slide.querySelector(".slide-number");
+          if (!badge) {
+            badge = document.createElement("div");
+            badge.className = "slide-number";
+            slide.appendChild(badge);
+          }
+          badge.textContent = `${i + 1}/${slides.length}`;
+        });
+        if (progress) progress.textContent = `${index + 1} / ${slides.length}`;
+        const notes = slides[index].querySelector(".notes");
+        notesPanel.textContent = notes ? notes.textContent.trim() : "";
+        window.location.hash = `slide-${index + 1}`;
+      }
+
+      function go(nextIndex) {
+        index = Math.max(0, Math.min(slides.length - 1, nextIndex));
+        render();
+      }
+
+      function toggleFullscreen() {
+        if (document.fullscreenElement) {
+          document.exitFullscreen();
+        } else {
+          document.documentElement.requestFullscreen();
+        }
+      }
+
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "ArrowRight" || event.key === "PageDown" || event.key === " ") {
+          event.preventDefault();
+          go(index + 1);
+        }
+        if (event.key === "ArrowLeft" || event.key === "PageUp") {
+          event.preventDefault();
+          go(index - 1);
+        }
+        if (event.key === "Home") go(0);
+        if (event.key === "End") go(slides.length - 1);
+        if (event.key.toLowerCase() === "f") toggleFullscreen();
+        if (event.key.toLowerCase() === "n") document.body.classList.toggle("notes-visible");
+        if (event.key.toLowerCase() === "g") document.body.classList.toggle("show-grid");
+        if (event.key.toLowerCase() === "p") toggleMode();
+        if (event.key === "?") document.body.classList.toggle("help-visible");
+      });
+
+      deck.addEventListener("click", (event) => {
+        const x = event.clientX / window.innerWidth;
+        go(index + (x > 0.5 ? 1 : -1));
+      });
+
+      window.addEventListener("resize", scaleDeck);
+
+      const hashMatch = window.location.hash.match(/slide-(\d+)/);
+      if (hashMatch) {
+        index = Math.max(0, Math.min(slides.length - 1, Number(hashMatch[1]) - 1));
+      }
+
+      applyMode();
+      render();
+    </script>
+  </body>
+</html>
