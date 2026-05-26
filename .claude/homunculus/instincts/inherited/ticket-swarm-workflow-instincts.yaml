@@ -1,0 +1,278 @@
+# Instincts generated from https://github.com/danialhasan/ticket-swarm-workflow
+# Generated: 2026-05-26T03:26:11.361Z
+# Version: 2.0
+# NOTE: This file supplements (does not replace) any existing curated instincts.
+# High-confidence manually curated instincts should be preserved alongside these.
+
+---
+id: ticket-swarm-workflow-commit-length
+trigger: "when writing a commit message"
+confidence: 0.6
+domain: git
+source: repo-analysis
+source_repo: https://github.com/danialhasan/ticket-swarm-workflow
+---
+
+# Ticket Swarm Workflow Commit Length
+
+## Action
+
+Keep commit messages concise (~32 characters)
+
+## Evidence
+
+- Average commit message length: 32 chars
+- Based on 1 commits
+
+---
+id: ticket-swarm-workflow-naming-files
+trigger: "when creating a new file"
+confidence: 0.8
+domain: code-style
+source: repo-analysis
+source_repo: https://github.com/danialhasan/ticket-swarm-workflow
+---
+
+# Ticket Swarm Workflow Naming Files
+
+## Action
+
+Use kebab-case naming convention
+
+## Evidence
+
+- Analyzed file naming patterns in repository
+- Dominant pattern: kebab-case
+
+---
+id: ticket-swarm-workflow-import-relative
+trigger: "when importing modules"
+confidence: 0.75
+domain: code-style
+source: repo-analysis
+source_repo: https://github.com/danialhasan/ticket-swarm-workflow
+---
+
+# Ticket Swarm Workflow Import Relative
+
+## Action
+
+Use relative imports for project files
+
+## Evidence
+
+- Import analysis shows relative import pattern
+- Example: import { x } from '../lib/x'
+
+---
+id: ticket-swarm-workflow-export-style
+trigger: "when exporting from a module"
+confidence: 0.7
+domain: code-style
+source: repo-analysis
+source_repo: https://github.com/danialhasan/ticket-swarm-workflow
+---
+
+# Ticket Swarm Workflow Export Style
+
+## Action
+
+Prefer named exports
+
+## Evidence
+
+- Export pattern analysis
+- Dominant style: named
+
+---
+id: ticket-swarm-workflow-test-separate
+trigger: "when writing tests"
+confidence: 0.8
+domain: testing
+source: repo-analysis
+source_repo: https://github.com/danialhasan/ticket-swarm-workflow
+---
+
+# Ticket Swarm Workflow Test Separate
+
+## Action
+
+Place tests in the tests/ or __tests__/ directory, mirroring src structure
+
+## Evidence
+
+- Separate test directory pattern detected
+- Tests live in dedicated test folders
+
+---
+id: ticket-swarm-workflow-instinct-file-naming
+trigger: "When creating a new file"
+confidence: 0.9
+domain: code-style
+source: repo-analysis
+source_repo: danialhasan/ticket-swarm-workflow
+---
+
+# Ticket Swarm Workflow Instinct File Naming
+
+## Action
+
+Name the file using kebab-case
+
+## Evidence
+
+- Pattern in namingConventions.files
+
+---
+id: ticket-swarm-workflow-instinct-function-naming
+trigger: "When defining a new function"
+confidence: 0.9
+domain: code-style
+source: repo-analysis
+source_repo: danialhasan/ticket-swarm-workflow
+---
+
+# Ticket Swarm Workflow Instinct Function Naming
+
+## Action
+
+Use camelCase for the function name
+
+## Evidence
+
+- Pattern in namingConventions.functions
+
+---
+id: ticket-swarm-workflow-instinct-class-naming
+trigger: "When defining a new class"
+confidence: 0.9
+domain: code-style
+source: repo-analysis
+source_repo: danialhasan/ticket-swarm-workflow
+---
+
+# Ticket Swarm Workflow Instinct Class Naming
+
+## Action
+
+Use PascalCase for the class name
+
+## Evidence
+
+- Pattern in namingConventions.classes
+
+---
+id: ticket-swarm-workflow-instinct-constant-naming
+trigger: "When defining a constant"
+confidence: 0.9
+domain: code-style
+source: repo-analysis
+source_repo: danialhasan/ticket-swarm-workflow
+---
+
+# Ticket Swarm Workflow Instinct Constant Naming
+
+## Action
+
+Use SCREAMING_SNAKE_CASE for the constant name
+
+## Evidence
+
+- Pattern in namingConventions.constants
+
+---
+id: ticket-swarm-workflow-instinct-import-style
+trigger: "When importing modules"
+confidence: 0.8
+domain: code-style
+source: repo-analysis
+source_repo: danialhasan/ticket-swarm-workflow
+---
+
+# Ticket Swarm Workflow Instinct Import Style
+
+## Action
+
+Use relative import paths
+
+## Evidence
+
+- Pattern in importStyle
+
+---
+id: ticket-swarm-workflow-instinct-export-style
+trigger: "When exporting modules or functions"
+confidence: 0.8
+domain: code-style
+source: repo-analysis
+source_repo: danialhasan/ticket-swarm-workflow
+---
+
+# Ticket Swarm Workflow Instinct Export Style
+
+## Action
+
+Use named exports
+
+## Evidence
+
+- Pattern in exportStyle
+
+---
+id: ticket-swarm-workflow-instinct-git-commit-format
+trigger: "When writing a commit message"
+confidence: 0.8
+domain: git
+source: repo-analysis
+source_repo: danialhasan/ticket-swarm-workflow
+---
+
+# Ticket Swarm Workflow Instinct Git Commit Format
+
+## Action
+
+Write a short, freeform message without a prefix, averaging around 32 characters
+
+## Evidence
+
+- Seen in commit: 'Add Build Future Codex demo deck'
+- Pattern in commits.type and commits.averageLength
+
+---
+id: ticket-swarm-workflow-instinct-test-location
+trigger: "When adding new tests"
+confidence: 0.8
+domain: testing
+source: repo-analysis
+source_repo: danialhasan/ticket-swarm-workflow
+---
+
+# Ticket Swarm Workflow Instinct Test Location
+
+## Action
+
+Place test files in a separate folder from source code
+
+## Evidence
+
+- Pattern in architecture.folderStructure.testLocation
+
+---
+id: ticket-swarm-workflow-instinct-docs-folder
+trigger: "When adding documentation"
+confidence: 0.9
+domain: architecture
+source: repo-analysis
+source_repo: danialhasan/ticket-swarm-workflow
+---
+
+# Ticket Swarm Workflow Instinct Docs Folder
+
+## Action
+
+Place documentation files in the 'docs' folder
+
+## Evidence
+
+- Pattern in architecture.folderStructure.commonFolders
+
