@@ -18,6 +18,9 @@ The structure comes from the requirements-engineering memo:
 
 [`docs/mastering-requirements-agentic-engineering-and-squad.md`](docs/mastering-requirements-agentic-engineering-and-squad.md)
 
+The Build Future Codex demo deck is available at
+[`docs/build-future-codex-demo-slides/index.html`](docs/build-future-codex-demo-slides/index.html).
+
 The core idea from that memo is simple:
 
 > Requirements engineering becomes powerful again because agents can carry its
